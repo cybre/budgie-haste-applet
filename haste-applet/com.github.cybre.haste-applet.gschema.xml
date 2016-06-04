@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="budgie">
-  <schema id="apps.haste-applet.settings">
+  <schema id="com.github.cybre.haste-applet">
     <key type="b" name="enable-label">
       <default>false</default>
       <summary>Enable applet label</summary>

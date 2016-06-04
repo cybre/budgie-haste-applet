@@ -19,7 +19,7 @@ CLEANFILES = \
 	$(BUILT_SOURCES)
 
 EXTRA_DIST = \
-	apps.haste-applet.settings.gschema.xml \
+	com.github.cybre.haste-applet.gschema.xml \
 	plugin.gresource.xml \
 	settings.ui
 
@@ -55,6 +55,6 @@ libhasteapplet_la_VALAFLAGS = \
 	--target-glib=2.38
 
 gsettings_SCHEMAS = \
-	apps.haste-applet.settings.gschema.xml
+	com.github.cybre.haste-applet.gschema.xml
 	
 @GSETTINGS_RULES@

@@ -17,7 +17,7 @@ public class Haste : GLib.Object, Budgie.Plugin {
     }
 }
 
-[GtkTemplate (ui = "/apps/haste-applet/settings/settings.ui")]
+[GtkTemplate (ui = "/com/github/cybre/haste-applet/settings.ui")]
 public class HasteAppletSettings : Gtk.Grid
 {
     [GtkChild]
@@ -69,8 +69,8 @@ public class HasteApplet : Budgie.Applet
     {
         Object(uuid: uuid);
 
-        settings_schema = "apps.haste-applet.settings";
-        settings_prefix = "/com/solus-project/budgie-panel/instance/haste-applet";
+        settings_schema = "com.github.cybre.haste-applet";
+        settings_prefix = "/com/github/cybre/haste-applet";
 
         settings = this.get_applet_settings(uuid);
 
@@ -127,9 +127,6 @@ public class HasteApplet : Budgie.Applet
 
         var display = this.get_display();
         var clipboard = Gtk.Clipboard.get_for_display(display, Gdk.SELECTION_CLIPBOARD);
-
-        on_settings_changed("haste-address");
-        on_settings_changed("enable-label");
 
         Soup.Session session = new Soup.Session();
 
@@ -192,6 +189,9 @@ public class HasteApplet : Budgie.Applet
         });
 
         show_all();
+
+        on_settings_changed("haste-address");
+        on_settings_changed("enable-label");
     }
 
     protected void on_settings_changed(string key)

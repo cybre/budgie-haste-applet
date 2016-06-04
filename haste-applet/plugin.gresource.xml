@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-        <gresource prefix="/apps/haste-applet/settings">
+        <gresource prefix="/com/github/cybre/haste-applet">
                 <file preprocess="xml-stripblanks">settings.ui</file>
         </gresource>
 </gresources>
