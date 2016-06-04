@@ -94,9 +94,12 @@ public class HasteApplet : Budgie.Applet
         scroller.height_request = 320;
 
         var textview = new Gtk.TextView();
+        textview.top_margin = 10;
+        textview.bottom_margin = 10;
         textview.left_margin = 10;
         textview.right_margin = 10;
         textview.editable = true;
+        textview.monospace = true;
 
         scroller.add(textview);
 
