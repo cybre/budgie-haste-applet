@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="budgie">
+  <schema id="apps.haste-applet.settings">
+    <key type="b" name="enable-label">
+      <default>false</default>
+      <summary>Enable applet label</summary>
+      <description>Simply show the label on the applet button</description>
+    </key>
+
+    <key type="s" name="haste-address">
+      <default>'hasteb.in'</default>
+      <summary>haste-server Address</summary>
+      <description>The haste-server address to use for pasting.</description>
+    </key>
+  </schema>
+</schemalist>
