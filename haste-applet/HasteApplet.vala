@@ -234,7 +234,7 @@ public class HasteApplet : Budgie.Applet
     {
         yield sleep_async(7000, c);
         ((Gtk.Revealer) widget).set_reveal_child(false);
-        yield sleep_async(2000, c);
+        yield sleep_async(100, c);
         widget.destroy();
         br -= 1;
     }
