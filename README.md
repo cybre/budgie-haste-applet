@@ -20,3 +20,5 @@ These can be installed on Solus by running:
 make
 sudo make install
 ```
+
+A package in the Solus repo will soon be available.
