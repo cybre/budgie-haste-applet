@@ -12,7 +12,7 @@
     <property name="row_spacing">10</property>
     <property name="column_spacing">6</property>
     <child>
-      <object class="GtkLabel" id="label1">
+      <object class="GtkLabel" id="label_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="halign">start</property>
@@ -37,7 +37,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label2">
+      <object class="GtkLabel" id="label_address">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="halign">start</property>

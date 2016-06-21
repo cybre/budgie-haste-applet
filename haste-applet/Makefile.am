@@ -31,6 +31,10 @@ hasteapplet_LTLIBRARIES = \
 
 libhasteapplet_la_SOURCES = \
 	HasteApplet.vala \
+	NewHasteView.vala \
+	HistoryView.vala \
+	AutomaticScrollBox.vala \
+	HistoryViewItem.vala \
 	plugin-resources.h \
 	plugin-resources.c
 
@@ -49,10 +53,6 @@ libhasteapplet_la_LDFLAGS = \
 	$(AM_LDFLAGS)
 
 libhasteapplet_la_VALAFLAGS = \
-	--pkg gtk+-3.0 \
-	--pkg gio-unix-2.0 \
-	--pkg libpeas-1.0 \
-	--pkg PeasGtk-1.0 \
 	--pkg budgie-1.0 \
 	--pkg libsoup-2.4 \
 	--gresources=${srcdir}/plugin.gresource.xml \
