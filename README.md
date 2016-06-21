@@ -1,7 +1,9 @@
 # haste-applet
 A Budgie applet for the haste service.
 
-## Dependencies
+---
+
+### Dependencies
 ```
 vala
 gtk+-3.0
@@ -15,7 +17,7 @@ libsoup-2.4
 These can be installed on Solus by running:  
 `sudo eopkg it vala libgtk-3-devel glib2-devel libpeas-devel budgie-desktop-devel libsoup-devel`
 
-## Installing
+### Installing
 ```
 ./autogen.sh --prefix=/usr
 make
@@ -23,3 +25,8 @@ sudo make install
 ```
 
 A package in the Solus repo will soon be available.
+
+---
+
+### Screenshot
+![Screenshot](./Screenshots/Screenshot.png)
