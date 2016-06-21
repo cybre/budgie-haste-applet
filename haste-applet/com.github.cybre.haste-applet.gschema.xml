@@ -4,11 +4,17 @@
     <key type="b" name="enable-label">
       <default>false</default>
       <summary>Enable applet label</summary>
-      <description>Simply show the label on the applet button</description>
+      <description>Show the label on the applet button</description>
+    </key>
+
+    <key type="a(xss)" name="history">
+      <default>[]</default>
+      <summary>History</summary>
+      <description>List of hastes.</description>
     </key>
 
     <key type="s" name="haste-address">
-      <default>'hasteb.in'</default>
+      <default>'hastebin.com'</default>
       <summary>haste-server Address</summary>
       <description>The haste-server address to use for pasting.</description>
     </key>
