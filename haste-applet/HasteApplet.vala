@@ -143,6 +143,8 @@ namespace HasteApplet
 
             show_all();
 
+            new_haste_view.get_child_at(0, 3).visible = false;
+
             on_settings_changed("enable-label");
             on_settings_changed("enable-history");
             on_settings_changed("haste-address");
@@ -159,14 +161,14 @@ namespace HasteApplet
                     string new_url;
                     if (is_the_url_valid(settings.get_string(key), out new_url)) {
                         if (new_haste_view.haste_address_invalid) {
-                            new_haste_view.post_button.label = "Haste it!";
+                            new_haste_view.dismiss_error_message();
                             new_haste_view.post_button.sensitive = true;
                             new_haste_view.haste_address_invalid = false;
                         }
                         new_haste_view.haste_address = new_url;
                     } else {
                         if (!new_haste_view.haste_address_invalid) {
-                            new_haste_view.post_button.label = "Invalid haste-server Address";
+                            new_haste_view.show_error_message("Invalid haste-server Address");
                             new_haste_view.post_button.sensitive = false;
                             new_haste_view.haste_address_invalid = true;
                         }

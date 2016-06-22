@@ -21,12 +21,14 @@ namespace HasteApplet
         private Gtk.TextBuffer textbuffer;
         private Gtk.TextIter? start_iter = null;
         private Gtk.TextIter? end_iter = null;
+        private Gtk.Revealer error_message_revealer;
+        private Gtk.Label error_message_label;
         private string? text = null;
         public Gtk.Button post_button;
         public string haste_address { set; get; default = "hastebin.com"; }
-        public HistoryView history_view;
         public bool is_editing { set; get; default = false; }
         public bool haste_address_invalid { set; get; default = false; }
+        public HistoryView history_view;
 
         public NewHasteView(Gtk.Stack stack) {
             row_spacing = 5;
@@ -105,14 +107,21 @@ namespace HasteApplet
                 upload_haste(session, stack);
             });
 
+            error_message_label = new Gtk.Label("");
+            error_message_label.get_style_context().add_class("dim-label");
+            error_message_revealer = new Gtk.Revealer();
+            error_message_revealer.add(error_message_label);
+
             attach(header_box, 0, 0, 1, 1);
             attach(scroller, 0, 1, 1, 1);
             attach(post_button, 0, 2, 1, 1);
+            attach(error_message_revealer, 0, 3, 1, 1);
             show_all();
         }
 
         private void upload_haste(Soup.Session session, Gtk.Stack stack)
         {
+            dismiss_error_message();
             post_button.label = "Hasting...";
             title_entry.sensitive = false;
             textview.sensitive = false;
@@ -140,14 +149,12 @@ namespace HasteApplet
                 }
 
                 if (link == "" || link.length > 30) {
-                    post_button.label = "Error. Connection to server failed.";
+                    show_error_message("Error. Connection to server failed.");
+                    post_button.label = "Haste it!";
                     title_entry.sensitive = true;
                     textview.sensitive = true;
-                    GLib.Timeout.add(5000, () => {
-                        post_button.label = "Haste it!";
-                        return true;
-                    });
                 } else {
+                    dismiss_error_message();
                     post_button.label = "Haste it!";
                     title_entry.sensitive = true;
                     textview.sensitive = true;
@@ -159,6 +166,20 @@ namespace HasteApplet
                     stack.set_visible_child_name("history_view");
                 }
             });
+        }
+
+        public void show_error_message(string message)
+        {
+            error_message_revealer.visible = true;
+            error_message_label.label = message;
+            error_message_revealer.reveal_child = true;
+        }
+
+        public void dismiss_error_message()
+        {
+            error_message_label.label = "";
+            error_message_revealer.reveal_child = false;
+            error_message_revealer.visible = false;
         }
     }
 }
