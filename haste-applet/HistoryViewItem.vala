@@ -138,6 +138,7 @@ namespace HasteApplet
             }
 
             time_label = new Gtk.Label(time_text);
+            time_label.tooltip_text = time.format("%d %B %Y");
             time_label.valign = Gtk.Align.CENTER;
             time_label.get_style_context().add_class("dim-label");
 
