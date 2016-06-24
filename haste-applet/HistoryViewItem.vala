@@ -99,7 +99,7 @@ namespace HasteApplet
             copy_button.tooltip_text = "Copy Haste URL";
 
             delete_button = new Gtk.Button.from_icon_name(
-                "edit-delete-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+                "list-remove-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             delete_button.relief = Gtk.ReliefStyle.NONE;
             delete_button.can_focus = false;
             delete_button.tooltip_text = "Delete Haste";
