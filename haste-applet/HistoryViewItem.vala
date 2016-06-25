@@ -89,7 +89,7 @@ namespace HasteApplet
             title_edit_box.pack_end(title_apply_button, false, false, 0);
 
             title_stack = new Gtk.Stack();
-            title_stack.set_transition_type(Gtk.StackTransitionType.CROSSFADE);
+            title_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
             title_stack.add_named(title_box, "title_box");
             title_stack.add_named(title_edit_box, "title_edit_box");
 

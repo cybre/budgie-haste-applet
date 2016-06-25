@@ -114,8 +114,7 @@ namespace HasteApplet
             new_haste_view.history_view = history_view;
 
             history_view.history_add_button.clicked.connect(() => {
-                stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT);
-                stack.visible_child_name = "new_haste_view";
+                stack.set_visible_child_full("new_haste_view", Gtk.StackTransitionType.SLIDE_LEFT);
                 if (!((Gtk.Revealer) new_haste_view.get_child_at(0, 3)).reveal_child) {
                     new_haste_view.get_child_at(0, 3).visible = false;
                 }
