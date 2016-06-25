@@ -68,6 +68,7 @@ namespace HasteApplet
 
             title_entry = new Gtk.Entry();
             title_entry.placeholder_text = "New Title";
+            title_entry.max_length = 50;
             title_entry.margin_end = 10;
 
             title_entry.set_icon_from_icon_name(
