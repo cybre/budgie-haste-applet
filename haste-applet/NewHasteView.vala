@@ -120,6 +120,7 @@ namespace HasteApplet
             show_all();
 
             textview.grab_focus();
+            error_message_revealer.visible = false;
         }
 
         private void upload_haste(Soup.Session session, Gtk.Stack stack)
