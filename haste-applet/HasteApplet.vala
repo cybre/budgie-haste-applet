@@ -120,16 +120,19 @@ namespace HasteApplet
             popover.add(stack);
 
             box.button_press_event.connect((e)=> {
-                if (e.button != 1) {
-                    return Gdk.EVENT_PROPAGATE;
-                }
                 if (popover.get_visible()) {
                     popover.hide();
                 } else {
-                    if (new_haste_view.is_editing) {
+                    if (e.button == 1) {
+                        if (new_haste_view.is_editing) {
+                            stack.set_visible_child_name("new_haste_view");
+                        } else {
+                            stack.set_visible_child_name("history_view");
+                        }
+                    } else if (e.button == 3) {
                         stack.set_visible_child_name("new_haste_view");
                     } else {
-                        stack.set_visible_child_name("history_view");
+                        return Gdk.EVENT_PROPAGATE;
                     }
                     manager.show_popover(box);
                 }
