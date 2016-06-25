@@ -106,6 +106,8 @@ namespace HasteApplet
             popover = new Gtk.Popover(box);
             stack = new Gtk.Stack();
 
+            popover.map.connect(entry_hack);
+
             new_haste_view = new NewHasteView(stack);
             history_view = new HistoryView(settings, clipboard, stack);
 
@@ -150,6 +152,21 @@ namespace HasteApplet
             on_settings_changed("enable-label");
             on_settings_changed("enable-history");
             on_settings_changed("haste-address");
+        }
+
+        private async void entry_hack()
+        {
+            new_haste_view.title_entry.can_focus = false;
+            yield sleep_async(1);
+            new_haste_view.title_entry.can_focus = true;
+        }
+
+        private async void sleep_async(int timeout)
+        {
+            uint timeout_src = 0;
+            timeout_src = GLib.Timeout.add(timeout, sleep_async.callback);
+            yield;
+            GLib.Source.remove(timeout_src);
         }
 
         protected void on_settings_changed(string key)

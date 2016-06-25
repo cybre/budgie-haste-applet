@@ -14,7 +14,6 @@ namespace HasteApplet
     public class NewHasteView : Gtk.Grid
     {
         private Gtk.Button header_back_button;
-        private Gtk.Entry title_entry;
         private Gtk.Box header_box;
         private Gtk.ScrolledWindow scroller;
         private Gtk.TextView textview;
@@ -24,6 +23,7 @@ namespace HasteApplet
         private Gtk.Revealer error_message_revealer;
         private Gtk.Label error_message_label;
         private string? text = null;
+        public Gtk.Entry title_entry;
         public Gtk.Button post_button;
         public string haste_address { set; get; default = "hastebin.com"; }
         public bool is_editing { set; get; default = false; }
@@ -118,6 +118,8 @@ namespace HasteApplet
             attach(post_button, 0, 2, 1, 1);
             attach(error_message_revealer, 0, 3, 1, 1);
             show_all();
+
+            textview.grab_focus();
         }
 
         private void upload_haste(Soup.Session session, Gtk.Stack stack)
