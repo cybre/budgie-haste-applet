@@ -47,7 +47,7 @@ namespace HasteApplet
 
             history_add_button.clicked.connect(() => {
                 stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT);
-                stack.set_visible_child_name("new_haste_view");
+                stack.visible_child_name = "new_haste_view";
             });
 
             Gtk.Separator separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);

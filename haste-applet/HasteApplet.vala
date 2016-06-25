@@ -104,7 +104,6 @@ namespace HasteApplet
             add(box);
 
             popover = new Gtk.Popover(box);
-
             stack = new Gtk.Stack();
 
             new_haste_view = new NewHasteView(stack);
@@ -125,12 +124,12 @@ namespace HasteApplet
                 } else {
                     if (e.button == 1) {
                         if (new_haste_view.is_editing) {
-                            stack.set_visible_child_name("new_haste_view");
+                            stack.visible_child_name = "new_haste_view";
                         } else {
-                            stack.set_visible_child_name("history_view");
+                            stack.visible_child_name = "history_view";
                         }
                     } else if (e.button == 3) {
-                        stack.set_visible_child_name("new_haste_view");
+                        stack.visible_child_name = "new_haste_view";
                     } else {
                         return Gdk.EVENT_PROPAGATE;
                     }

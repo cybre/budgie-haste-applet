@@ -161,27 +161,27 @@ namespace HasteApplet
 
             title_edit_button.clicked.connect(() => {
                 title_entry.text = title;
-                title_stack.set_visible_child_name("title_edit_box");
+                title_stack.visible_child_name = "title_edit_box";
                 title_entry.grab_focus();
             });
 
             title_apply_button.clicked.connect(() => {
                 if (title_entry.text != title) {
                     apply_changes(settings);
-                    title_stack.set_visible_child_name("title_box");
+                    title_stack.visible_child_name = "title_box";
                 } else {
-                    title_stack.set_visible_child_name("title_box");
+                    title_stack.visible_child_name = "title_box";
                 }
             });
 
             title_entry.activate.connect(() => {
                 apply_changes(settings);
-                title_stack.set_visible_child_name("title_box");
+                title_stack.visible_child_name = "title_box";
             });
 
             title_entry.key_press_event.connect((event) => {
                 if (event.keyval == Gdk.Key.Escape) {
-                    title_stack.set_visible_child_name("title_box");
+                    title_stack.visible_child_name = "title_box";
                     return true;
                 }
                 return false;

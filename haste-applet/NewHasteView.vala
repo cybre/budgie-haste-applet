@@ -41,7 +41,7 @@ namespace HasteApplet
 
             header_back_button.clicked.connect(() => {
                 stack.set_transition_type(Gtk.StackTransitionType.SLIDE_RIGHT);
-                stack.set_visible_child_name("history_view");
+                stack.visible_child_name = "history_view";
             });
 
             title_entry = new Gtk.Entry();
@@ -164,7 +164,7 @@ namespace HasteApplet
                     textbuffer.set_text("", 0);
                     title_entry.text = "";
                     stack.set_transition_type(Gtk.StackTransitionType.SLIDE_RIGHT);
-                    stack.set_visible_child_name("history_view");
+                    stack.visible_child_name = "history_view";
                 }
             });
         }
