@@ -16,7 +16,6 @@ namespace HasteApplet
         private Gtk.Button header_back_button;
         private Gtk.Box header_box;
         private Gtk.ScrolledWindow scroller;
-        private Gtk.TextView textview;
         private Gtk.TextBuffer textbuffer;
         private Gtk.TextIter? start_iter = null;
         private Gtk.TextIter? end_iter = null;
@@ -24,6 +23,7 @@ namespace HasteApplet
         private Gtk.Label error_message_label;
         private string? text = null;
         public Gtk.Entry title_entry;
+        public Gtk.TextView textview;
         public Gtk.Button post_button;
         public string haste_address { set; get; default = "hastebin.com"; }
         public bool is_editing { set; get; default = false; }
@@ -119,7 +119,6 @@ namespace HasteApplet
             attach(error_message_revealer, 0, 3, 1, 1);
             show_all();
 
-            textview.grab_focus();
             error_message_revealer.visible = false;
         }
 

@@ -19,7 +19,7 @@ namespace HasteApplet
         private Gtk.Box clear_all_box;
         private Gtk.Label placeholder_label;
         private Gtk.Label history_header_label;
-        private Gtk.Button history_add_button;
+        public Gtk.Button history_add_button;
         private Gtk.Button clear_all_button;
         private Gtk.Image placeholder_image;
         private GLib.Settings settings;
@@ -28,7 +28,7 @@ namespace HasteApplet
         private HistoryViewItem history_view_item;
         public Gtk.ListBox history_listbox;
 
-        public HistoryView(GLib.Settings settings, Gtk.Clipboard clipboard, Gtk.Stack stack)
+        public HistoryView(GLib.Settings settings, Gtk.Clipboard clipboard)
         {
             Object(spacing: 0, orientation: Gtk.Orientation.VERTICAL);
             width_request = 300;
@@ -44,11 +44,6 @@ namespace HasteApplet
             history_add_button = new Gtk.Button.with_label("Add");
             history_add_button.tooltip_text = "Add a new haste";
             history_add_button.can_focus = false;
-
-            history_add_button.clicked.connect(() => {
-                stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT);
-                stack.visible_child_name = "new_haste_view";
-            });
 
             Gtk.Separator separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
 

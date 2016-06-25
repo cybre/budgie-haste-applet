@@ -109,9 +109,18 @@ namespace HasteApplet
             popover.map.connect(entry_hack);
 
             new_haste_view = new NewHasteView(stack);
-            history_view = new HistoryView(settings, clipboard, stack);
+            history_view = new HistoryView(settings, clipboard);
 
             new_haste_view.history_view = history_view;
+
+            history_view.history_add_button.clicked.connect(() => {
+                stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT);
+                stack.visible_child_name = "new_haste_view";
+                if (!((Gtk.Revealer) new_haste_view.get_child_at(0, 3)).reveal_child) {
+                    new_haste_view.get_child_at(0, 3).visible = false;
+                }
+                new_haste_view.textview.grab_focus();
+            });
 
             stack.add_named(history_view, "history_view");
             stack.add_named(new_haste_view, "new_haste_view");
@@ -147,8 +156,6 @@ namespace HasteApplet
 
             show_all();
 
-            new_haste_view.get_child_at(0, 3).visible = false;
-
             on_settings_changed("enable-label");
             on_settings_changed("enable-history");
             on_settings_changed("haste-address");
@@ -156,9 +163,14 @@ namespace HasteApplet
 
         private async void entry_hack()
         {
-            new_haste_view.title_entry.can_focus = false;
-            yield sleep_async(1);
-            new_haste_view.title_entry.can_focus = true;
+            if (stack.visible_child_name == "new_haste_view") {
+                if (!((Gtk.Revealer) new_haste_view.get_child_at(0, 3)).reveal_child) {
+                    new_haste_view.get_child_at(0, 3).visible = false;
+                }
+                new_haste_view.title_entry.can_focus = false;
+                yield sleep_async(1);
+                new_haste_view.title_entry.can_focus = true;
+            }
         }
 
         private async void sleep_async(int timeout)
