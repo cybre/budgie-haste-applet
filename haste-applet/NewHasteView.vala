@@ -46,6 +46,7 @@ namespace HasteApplet
 
             title_entry = new Gtk.Entry();
             title_entry.placeholder_text = "Title (Optional)";
+            title_entry.max_length = 50;
             title_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "edit-clear-symbolic");
             title_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "Clear");
 
