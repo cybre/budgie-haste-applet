@@ -110,6 +110,8 @@ namespace HasteApplet
             error_message_label = new Gtk.Label("");
             error_message_label.get_style_context().add_class("dim-label");
             error_message_revealer = new Gtk.Revealer();
+            error_message_revealer.no_show_all = true;
+            error_message_revealer.visible = false;
             error_message_revealer.add(error_message_label);
 
             attach(header_box, 0, 0, 1, 1);
@@ -117,8 +119,6 @@ namespace HasteApplet
             attach(post_button, 0, 2, 1, 1);
             attach(error_message_revealer, 0, 3, 1, 1);
             show_all();
-
-            error_message_revealer.visible = false;
         }
 
         private void upload_haste(Soup.Session session, Gtk.Stack stack)
@@ -171,8 +171,9 @@ namespace HasteApplet
 
         public void show_error_message(string message)
         {
-            error_message_revealer.visible = true;
             error_message_label.label = message;
+            error_message_label.visible = true;
+            error_message_revealer.visible = true;
             error_message_revealer.reveal_child = true;
         }
 
