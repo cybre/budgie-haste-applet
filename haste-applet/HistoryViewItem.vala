@@ -11,7 +11,7 @@
 
 namespace HasteApplet
 {
-    public class HistoryViewItem : Gtk.ListBoxRow
+    public class HistoryViewItem : Gtk.Revealer
     {
         private Gtk.Box history_view_item_box;
         private Gtk.Box title_box;
@@ -35,14 +35,15 @@ namespace HasteApplet
         private string title;
         private string url;
         private int64 timestamp;
-        public Gtk.Revealer revealer;
 
-        public HistoryViewItem(int n, Gtk.Clipboard clipboard,
-            GLib.Settings settings, HistoryView history_view)
+        public signal void copy(string url);
+        public signal void deletion();
+
+        public HistoryViewItem(int n, GLib.Settings settings)
         {
-            selectable = false;
             can_focus = false;
-            activatable = false;
+            transition_type = Gtk.RevealerTransitionType.NONE;
+            transition_duration = 500;
 
             history_list = settings.get_value("history");
             history_entry = history_list.get_child_value(n);
@@ -188,12 +189,11 @@ namespace HasteApplet
             });
 
             copy_button.clicked.connect(() => {
-                clipboard.set_text("http://%s".printf(url), -1);
+                copy(url);
             });
 
             delete_button.clicked.connect(() => {
-                delete_item(settings, history_view);
-                history_view.update_child_count();
+                delete_item(settings);
             });
 
             history_view_item_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
@@ -204,39 +204,13 @@ namespace HasteApplet
             history_view_item_box.pack_start(title_main_box, true, true, 0);
             history_view_item_box.pack_start(url_main_box, true, true, 0);
 
-            revealer = new Gtk.Revealer();
-            revealer.transition_type = Gtk.RevealerTransitionType.NONE;
-            revealer.transition_duration = 500;
-            revealer.add(history_view_item_box);
-
-            add(revealer);
+            add(history_view_item_box);
+            reveal_child = false;
             show_all();
         }
 
-        private void delete_item(GLib.Settings settings, HistoryView history_view)
+        private void delete_item(GLib.Settings settings)
         {
-            int index = get_index();
-
-            if (index == 0) {
-                Gtk.Widget row_after = history_view.history_listbox.get_row_at_index(index + 1);
-                if (row_after != null) row_after.destroy();
-            } else {
-                Gtk.Widget row_before = history_view.history_listbox.get_row_at_index(index - 1);
-                if (row_before != null) row_before.destroy();
-            }
-
-            if (history_view.history_listbox.get_children().length() != 1) {
-                revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
-                revealer.transition_duration = 150;
-                revealer.reveal_child = false;
-                GLib.Timeout.add(150, () => {
-                    destroy();
-                    return true;
-                });
-            } else {
-                destroy();
-            }
-
             history_list = settings.get_value("history");
             GLib.Variant[]? history_l = null;
             GLib.Variant? history_entry_curr = null;
@@ -256,6 +230,21 @@ namespace HasteApplet
                 GLib.Variant history_entry_array = new GLib.Variant.array(null, history_l);
                 settings.set_value("history", history_entry_array);
             }
+
+            deletion();
+
+            transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
+            transition_duration = 150;
+
+            /* The revealer close animation never gets triggered for 
+               the first item in the list for some reason
+               so this will destroy the parent without the close animation.
+               Might be a GTK+ bug. */
+            notify["child-revealed"].connect_after(() => {
+                get_parent().destroy();
+            });
+
+            reveal_child = false;
         }
 
         private void apply_changes(GLib.Settings settings)

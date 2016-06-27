@@ -115,9 +115,6 @@ namespace HasteApplet
 
             history_view.history_add_button.clicked.connect(() => {
                 stack.set_visible_child_full("new_haste_view", Gtk.StackTransitionType.SLIDE_LEFT);
-                if (!((Gtk.Revealer) new_haste_view.get_child_at(0, 3)).reveal_child) {
-                    new_haste_view.get_child_at(0, 3).visible = false;
-                }
                 new_haste_view.textview.grab_focus();
             });
 
@@ -163,9 +160,6 @@ namespace HasteApplet
         private async void entry_hack()
         {
             if (stack.visible_child_name == "new_haste_view") {
-                if (!((Gtk.Revealer) new_haste_view.get_child_at(0, 3)).reveal_child) {
-                    new_haste_view.get_child_at(0, 3).visible = false;
-                }
                 new_haste_view.title_entry.can_focus = false;
                 yield sleep_async(1);
                 new_haste_view.title_entry.can_focus = true;

@@ -115,10 +115,11 @@ namespace HasteApplet
 
         public async void update_history(int n, bool startup)
         {
+            Gtk.ListBoxRow? separator_item = null;
             if (history_listbox.get_children().length() != 0) {
                 Gtk.Separator separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
                 separator.can_focus = false;
-                Gtk.ListBoxRow separator_item = new Gtk.ListBoxRow();
+                separator_item = new Gtk.ListBoxRow();
                 separator_item.selectable = false;
                 separator_item.can_focus = false;
                 separator_item.activatable = false;
@@ -126,20 +127,47 @@ namespace HasteApplet
                 history_listbox.prepend(separator_item);
             }
 
-            history_view_item = new HistoryViewItem(n, clipboard, settings, this);
-
+            history_view_item = new HistoryViewItem(n, settings);
             history_listbox.prepend(history_view_item);
+
+            Gtk.ListBoxRow parent = (Gtk.ListBoxRow) history_view_item.get_parent();
+            parent.selectable = false;
+            parent.can_focus = false;
+            parent.activatable = false;
+
             history_listbox.show_all();
 
             if (startup) {
-                history_view_item.revealer.reveal_child = true;
+                history_view_item.reveal_child = true;
             } else {
-                history_view_item.revealer.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
+                history_view_item.transition_type = Gtk.RevealerTransitionType.SLIDE_UP;
                 GLib.Timeout.add(1, () => {
-                    history_view_item.revealer.reveal_child = true;
+                    history_view_item.reveal_child = true;
                     return true;
                 });
             }
+
+            history_view_item.copy.connect((url) => {
+                clipboard.set_text("http://%s".printf(url), -1);
+            });
+
+            history_view_item.deletion.connect(() => {
+                int index = parent.get_index();
+
+                if (history_listbox.get_children().length() == 1) {
+                    parent.destroy();
+                    return;
+                }
+
+                if (index == 0) {
+                    if (separator_item != null) separator_item.destroy();
+                } else {
+                    Gtk.Widget row_before = history_listbox.get_row_at_index(index - 1);
+                    if (row_before != null) row_before.destroy();
+                }
+
+                update_child_count();
+            });
 
             update_child_count();
         }
