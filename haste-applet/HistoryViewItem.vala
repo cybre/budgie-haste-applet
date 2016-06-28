@@ -170,14 +170,14 @@ namespace HasteApplet
             title_apply_button.clicked.connect(() => {
                 if (title_entry.text != title) {
                     apply_changes(settings);
-                    title_stack.visible_child_name = "title_box";
-                } else {
-                    title_stack.visible_child_name = "title_box";
                 }
+                title_stack.visible_child_name = "title_box";
             });
 
             title_entry.activate.connect(() => {
-                apply_changes(settings);
+                if (title_entry.text != title) {
+                    apply_changes(settings);
+                }
                 title_stack.visible_child_name = "title_box";
             });
 
