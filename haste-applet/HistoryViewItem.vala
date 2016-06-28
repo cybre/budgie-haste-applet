@@ -51,7 +51,7 @@ namespace HasteApplet
 
             time = new GLib.DateTime.from_unix_local(timestamp);
 
-            title_label = new Gtk.Label("<b>%s</b>".printf(title));
+            title_label = new Gtk.Label("<b>%s</b>".printf(title.strip()));
             title_label.use_markup = true;
             title_label.halign = Gtk.Align.START;
             title_label.max_width_chars = 23;
