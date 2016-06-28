@@ -253,12 +253,12 @@ namespace HasteApplet
             if (title_entry.text == "") {
                 title = "<b>Untitled</b>";
             } else {
-                title = "<b>%s</b>".printf(title_entry.text);
+                title = "<b>%s</b>".printf(title_entry.text.strip());
             }
 
             title_label.set_text(title);
             title_label.use_markup = true;
-            title = title_label.get_text();
+            title = title_entry.text.strip();
 
             history_list = settings.get_value("history");
             GLib.Variant[]? history_variant_list = null;
