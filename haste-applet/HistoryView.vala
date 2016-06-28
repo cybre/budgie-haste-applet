@@ -154,11 +154,6 @@ namespace HasteApplet
             history_view_item.deletion.connect(() => {
                 int index = parent.get_index();
 
-                if (history_listbox.get_children().length() == 1) {
-                    parent.destroy();
-                    return;
-                }
-
                 if (index == 0) {
                     if (separator_item != null) separator_item.destroy();
                 } else {
