@@ -24,6 +24,11 @@ make
 sudo make install
 ```
 
+The package can be installed on Arch using 
+```
+yaourt -S haste-applet
+```
+
 A package in the Solus repo will soon be available.
 
 ---
