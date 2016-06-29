@@ -23,15 +23,20 @@ These can be installed on Solus by running:
 make
 sudo make install
 ```
+#### Solus
+People using the **unstable** repo on Solus can install haste-applet from the Software Centre or via the command line:
+```
+sudo eopkg it haste-applet
+```
+The package will be available in the **stable** repo as soon as the next repo sync occurs.
 
-The package can be installed on Arch using 
+#### Arch Linux
+The package can be installed on Arch using
 ```
 yaourt -S haste-applet
 ```
 
-A package in the Solus repo will soon be available.
-
 ---
 
 ### Screenshot
-![Screenshot](./Screenshots/Screenshot.png)
+![Screenshot](screenshot.png)
