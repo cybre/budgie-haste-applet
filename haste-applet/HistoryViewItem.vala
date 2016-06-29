@@ -51,6 +51,7 @@ namespace HasteApplet
 
             time = new GLib.DateTime.from_unix_local(timestamp);
 
+            if (title == "") title = "Untitled";
             title_label = new Gtk.Label("<b>%s</b>".printf(title.strip()));
             title_label.use_markup = true;
             title_label.halign = Gtk.Align.START;
@@ -251,14 +252,13 @@ namespace HasteApplet
         private void apply_changes(GLib.Settings settings)
         {
             if (title_entry.text == "") {
-                title = "<b>Untitled</b>";
+                title = "Untitled";
             } else {
-                title = "<b>%s</b>".printf(title_entry.text.strip());
+                title = title_entry.text.strip();
             }
 
-            title_label.set_text(title);
+            title_label.set_text("<b>%s</b>".printf(title));
             title_label.use_markup = true;
-            title = title_entry.text.strip();
 
             history_list = settings.get_value("history");
             GLib.Variant[]? history_variant_list = null;
