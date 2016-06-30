@@ -1,5 +1,5 @@
 # haste-applet
-A Budgie applet for the haste service.
+A Budgie applet for pasting text to any haste server.
 
 ---
 
