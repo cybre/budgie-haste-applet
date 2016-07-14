@@ -133,7 +133,7 @@ namespace HasteApplet
             Soup.MemoryUse buffer = Soup.MemoryUse.COPY;
             textbuffer.get_bounds(out start_iter, out end_iter);
             text = textbuffer.get_text(start_iter, end_iter, true);
-            
+
             message.set_request("application/x-www-form-urlencoded", buffer, text.data);
             message.set_flags(Soup.MessageFlags.NO_REDIRECT);
 
