@@ -156,6 +156,7 @@ namespace HasteApplet
 
                 if (history_listbox.get_children().length() == 1) {
                     parent.destroy();
+                    update_child_count();
                     return;
                 }
 
