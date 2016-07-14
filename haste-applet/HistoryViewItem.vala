@@ -1,8 +1,8 @@
 /*
  * This file is part of haste-applet
- * 
+ *
  * Copyright (C) 2016 Stefan Ric <stfric369@gmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -27,7 +27,9 @@ namespace HasteApplet
         private Gtk.Button delete_button;
         private Gtk.EventBox url_event_box;
         private Gtk.Stack title_stack;
+        private Gtk.Stack copy_stack;
         private Gtk.Entry title_entry;
+        private Gtk.Image copy_ok_image;
         private GLib.Settings gnome_settings;
         private GLib.DateTime time;
         private GLib.Variant history_list;
@@ -101,16 +103,24 @@ namespace HasteApplet
             copy_button.can_focus = false;
             copy_button.tooltip_text = "Copy Haste URL";
 
+            copy_ok_image = new Gtk.Image.from_icon_name(
+                "emblem-ok-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
+
+            copy_stack = new Gtk.Stack();
+            copy_stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT;
+            copy_stack.add_named(copy_button, "copy_button");
+            copy_stack.add_named(copy_ok_image, "copy_ok_image");
+
             delete_button = new Gtk.Button.from_icon_name(
                 "list-remove-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             delete_button.relief = Gtk.ReliefStyle.NONE;
             delete_button.can_focus = false;
             delete_button.tooltip_text = "Delete Haste";
-            
+
             title_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_main_box.pack_start(title_stack, true, true, 0);
             title_main_box.pack_end(delete_button, false, false, 0);
-            title_main_box.pack_end(copy_button, false, false, 0);
+            title_main_box.pack_end(copy_stack, false, false, 0);
 
             url_label = new Gtk.Label(url);
             url_label.halign = Gtk.Align.START;
@@ -191,7 +201,12 @@ namespace HasteApplet
             });
 
             copy_button.clicked.connect(() => {
+                copy_stack.visible_child_name = "copy_ok_image";
                 copy(url);
+                GLib.Timeout.add(500, () => {
+                    copy_stack.set_visible_child_full("copy_button", Gtk.StackTransitionType.SLIDE_RIGHT);
+                    return false;
+                });
             });
 
             delete_button.clicked.connect(() => {
