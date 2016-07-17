@@ -30,24 +30,26 @@ public class HasteAppletSettings : Gtk.Grid
 
     public HasteAppletSettings(Settings? settings)
     {
+        entry_address.input_purpose = Gtk.InputPurpose.URL;
+        entry_address.secondary_icon_activatable = false;
+        entry_address.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "The URL is invalid.");
+
         this.settings = settings;
         settings.bind("enable-label", switch_label, "active", SettingsBindFlags.DEFAULT);
         settings.bind("haste-address", entry_address, "text", SettingsBindFlags.DEFAULT);
 
-        Gtk.Label label_error = new Gtk.Label("");
-        label_error.halign = Gtk.Align.CENTER;
-        label_error.get_style_context().add_class("dim-label");
-        attach(label_error, 1, 2, 2, 1);
-
         if (!is_the_url_valid(settings.get_string("haste-address"), null)) {
-            label_error.label = "URL Invalid";
+            entry_address.secondary_icon_name = "dialog-error-symbolic";
+            entry_address.get_style_context().add_class("error");
         }
 
         settings.changed.connect(() => {
             if (is_the_url_valid(settings.get_string("haste-address"), null)) {
-                label_error.label = "";
+                entry_address.secondary_icon_name = null;
+                entry_address.get_style_context().remove_class("error");
             } else {
-                label_error.label = "URL Invalid";
+                entry_address.secondary_icon_name = "dialog-error-symbolic";
+                entry_address.get_style_context().add_class("error");
             }
         });
     }
