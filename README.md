@@ -24,11 +24,10 @@ make
 sudo make install
 ```
 #### Solus
-People using the **unstable** repo on Solus can install haste-applet from the Software Centre or via the command line:
+You can install haste-applet from the Software Centre or via the command line:
 ```
 sudo eopkg it haste-applet
 ```
-The package will be available in the **stable** repo as soon as the next repo sync occurs.
 
 #### Arch Linux
 The package can be installed on Arch using
