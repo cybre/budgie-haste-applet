@@ -65,6 +65,7 @@ namespace HasteApplet
             title_edit_button.relief = Gtk.ReliefStyle.NONE;
             title_edit_button.can_focus = false;
             title_edit_button.tooltip_text = "Edit Title";
+            title_edit_button.get_style_context().add_class("action-button");
 
             title_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_box.pack_start(title_label, true, true, 0);
@@ -87,6 +88,7 @@ namespace HasteApplet
             title_apply_button.relief = Gtk.ReliefStyle.NONE;
             title_apply_button.can_focus = false;
             title_apply_button.tooltip_text = "Apply Changes";
+            title_apply_button.get_style_context().add_class("action-button");
 
             title_edit_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_edit_box.pack_start(title_entry, true, true, 0);
@@ -102,6 +104,7 @@ namespace HasteApplet
             copy_button.relief = Gtk.ReliefStyle.NONE;
             copy_button.can_focus = false;
             copy_button.tooltip_text = "Copy Haste URL";
+            copy_button.get_style_context().add_class("action-button");
 
             copy_ok_image = new Gtk.Image.from_icon_name(
                 "emblem-ok-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
@@ -116,6 +119,7 @@ namespace HasteApplet
             delete_button.relief = Gtk.ReliefStyle.NONE;
             delete_button.can_focus = false;
             delete_button.tooltip_text = "Delete Haste";
+            delete_button.get_style_context().add_class("action-button");
 
             title_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_main_box.pack_start(title_stack, true, true, 0);

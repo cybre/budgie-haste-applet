@@ -75,6 +75,10 @@ namespace HasteApplet
             .haste-applet separator {
                 background-color: rgba(0, 0, 0, 0.2);
             }
+
+            .action-button {
+                padding: 0;
+            }
         """;
 
         public override Gtk.Widget? get_settings_ui() {
