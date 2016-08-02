@@ -37,9 +37,10 @@ namespace HasteApplet
             this.settings = settings;
             this.clipboard = clipboard;
 
-            history_header_label = new Gtk.Label("<b>Recent Hastes</b>");
+            history_header_label = new Gtk.Label("<span font=\"11\">Recent Hastes</span>");
             history_header_label.use_markup = true;
             history_header_label.halign = Gtk.Align.START;
+            history_header_label.get_style_context().add_class("dim-label");
 
             history_add_button = new Gtk.Button.with_label("Add");
             history_add_button.tooltip_text = "Add a new haste";
