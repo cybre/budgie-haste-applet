@@ -13,20 +13,13 @@ namespace HasteApplet
 {
     public class HistoryView : Gtk.Box
     {
-        private Gtk.Box history_header_sub_box;
-        private Gtk.Box history_header_box;
-        private Gtk.Box placeholder_box;
-        private Gtk.Box clear_all_box;
-        private Gtk.Label placeholder_label;
-        private Gtk.Label history_header_label;
-        public Gtk.Button history_add_button;
         private Gtk.Button clear_all_button;
-        private Gtk.Image placeholder_image;
-        private GLib.Settings settings;
+        private Gtk.ListBox history_listbox;
         private Gtk.Clipboard clipboard;
-        private AutomaticScrollBox history_scroller;
+        private GLib.Settings settings;
         private HistoryViewItem history_view_item;
-        public Gtk.ListBox history_listbox;
+        public Gtk.Button history_add_button;
+
 
         public HistoryView(GLib.Settings settings, Gtk.Clipboard clipboard)
         {
@@ -37,78 +30,70 @@ namespace HasteApplet
             this.settings = settings;
             this.clipboard = clipboard;
 
-            history_header_label = new Gtk.Label("<span font=\"11\">Recent Hastes</span>");
-            history_header_label.use_markup = true;
-            history_header_label.halign = Gtk.Align.START;
-            history_header_label.get_style_context().add_class("dim-label");
+            Gtk.Label header_label = new Gtk.Label("<span font=\"11\">Recent Hastes</span>");
+            header_label.use_markup = true;
+            header_label.halign = Gtk.Align.START;
+            header_label.get_style_context().add_class("dim-label");
 
             history_add_button = new Gtk.Button.with_label("Add");
             history_add_button.tooltip_text = "Add a new haste";
             history_add_button.can_focus = false;
 
-            Gtk.Separator separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
+            Gtk.Box header_sub_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+            header_sub_box.margin = 10;
+            header_sub_box.pack_start(header_label, true, true, 0);
+            header_sub_box.pack_start(history_add_button, false, false, 0);
 
-            history_header_sub_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-            history_header_sub_box.margin = 10;
-            history_header_sub_box.pack_start(history_header_label, true, true, 0);
-            history_header_sub_box.pack_start(history_add_button, false, false, 0);
-
-            history_header_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-            history_header_box.pack_start(history_header_sub_box, true, true, 0);
-            history_header_box.pack_start(separator, true, true, 0);
+            Gtk.Box header_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+            header_box.pack_start(header_sub_box, true, true, 0);
+            header_box.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), true, true, 0);
 
             history_listbox = new Gtk.ListBox();
             history_listbox.selection_mode = Gtk.SelectionMode.NONE;
-            history_scroller = new AutomaticScrollBox(null, null);
+
+            AutomaticScrollBox history_scroller = new AutomaticScrollBox(null, null);
             history_scroller.max_height = 265;
             history_scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
             history_scroller.add(history_listbox);
 
             clear_all_button = new Gtk.Button.with_label("Clear all Hastes");
-            ((Gtk.Label) clear_all_button.get_child()).halign = Gtk.Align.START;
             clear_all_button.get_child().margin = 5;
             clear_all_button.get_child().margin_start = 0;
             clear_all_button.clicked.connect(clear_all);
             clear_all_button.can_focus = false;
             clear_all_button.relief = Gtk.ReliefStyle.NONE;
 
-            clear_all_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+            Gtk.Box clear_all_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
             clear_all_box.pack_start(new Gtk.Separator(Gtk.Orientation.HORIZONTAL), false, false, 0);
             clear_all_box.pack_end(clear_all_button, false, true, 0);
 
-            placeholder_image = new Gtk.Image.from_icon_name(
+            Gtk.Image placeholder_image = new Gtk.Image.from_icon_name(
                 "action-unavailable-symbolic", Gtk.IconSize.DIALOG);
             placeholder_image.pixel_size = 64;
-            placeholder_label = new Gtk.Label("<big>Nothing to see here</big>");
+            Gtk.Label placeholder_label = new Gtk.Label("<big>Nothing to see here</big>");
             placeholder_label.use_markup = true;
-            placeholder_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
+            Gtk.Box placeholder_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
             placeholder_box.margin = 40;
             placeholder_box.get_style_context().add_class("dim-label");
             placeholder_box.halign = Gtk.Align.CENTER;
             placeholder_box.valign = Gtk.Align.CENTER;
             placeholder_box.pack_start(placeholder_image, false, false, 6);
             placeholder_box.pack_start(placeholder_label, false, false, 0);
-
             history_listbox.set_placeholder(placeholder_box);
             placeholder_box.show_all();
 
-            pack_start(history_header_box, false, false, 0);
+            pack_start(header_box, false, false, 0);
             pack_start(history_scroller, true, true, 0);
             pack_start(clear_all_box, true, true, 0);
-            show_all();
 
+            show_all();
             update_child_count();
         }
 
         public void update_child_count()
         {
             uint len = history_listbox.get_children().length();
-
-            if (len == 0) {
-                clear_all_button.sensitive = false;
-            } else {
-                clear_all_button.sensitive = true;
-            }
+            clear_all_button.sensitive = !(len == 0);
         }
 
         public async void update_history(int n, bool startup)
@@ -116,11 +101,9 @@ namespace HasteApplet
             Gtk.ListBoxRow? separator_item = null;
             if (history_listbox.get_children().length() != 0) {
                 Gtk.Separator separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
-                separator.can_focus = false;
                 separator_item = new Gtk.ListBoxRow();
-                separator_item.selectable = false;
-                separator_item.can_focus = false;
-                separator_item.activatable = false;
+                separator.can_focus = separator_item.selectable = false;
+                separator_item.can_focus = separator_item.activatable = false;
                 separator_item.add(separator);
                 history_listbox.prepend(separator_item);
             }
@@ -129,9 +112,7 @@ namespace HasteApplet
             history_listbox.prepend(history_view_item);
 
             Gtk.ListBoxRow parent = (Gtk.ListBoxRow) history_view_item.get_parent();
-            parent.selectable = false;
-            parent.can_focus = false;
-            parent.activatable = false;
+            parent.selectable = parent.can_focus = parent.activatable = false;
 
             history_listbox.show_all();
 
@@ -145,9 +126,7 @@ namespace HasteApplet
                 });
             }
 
-            history_view_item.copy.connect((url) => {
-                clipboard.set_text("http://%s".printf(url), -1);
-            });
+            history_view_item.copy.connect((url) => { clipboard.set_text(@"http://$url", -1); });
 
             history_view_item.deletion.connect(() => {
                 int index = parent.get_index();

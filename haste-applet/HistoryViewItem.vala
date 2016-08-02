@@ -13,27 +13,8 @@ namespace HasteApplet
 {
     public class HistoryViewItem : Gtk.Revealer
     {
-        private Gtk.Box history_view_item_box;
-        private Gtk.Box title_box;
-        private Gtk.Box title_edit_box;
-        private Gtk.Box title_main_box;
-        private Gtk.Box url_main_box;
         private Gtk.Label title_label;
-        private Gtk.Label url_label;
-        private Gtk.Label time_label;
-        private Gtk.Button title_edit_button;
-        private Gtk.Button title_apply_button;
-        private Gtk.Button copy_button;
-        private Gtk.Button delete_button;
-        private Gtk.EventBox url_event_box;
-        private Gtk.Stack title_stack;
-        private Gtk.Stack copy_stack;
         private Gtk.Entry title_entry;
-        private Gtk.Image copy_ok_image;
-        private GLib.Settings gnome_settings;
-        private GLib.DateTime time;
-        private GLib.Variant history_list;
-        private GLib.Variant history_entry;
         private string title;
         private string url;
         private int64 timestamp;
@@ -47,11 +28,11 @@ namespace HasteApplet
             transition_type = Gtk.RevealerTransitionType.NONE;
             transition_duration = 500;
 
-            history_list = settings.get_value("history");
-            history_entry = history_list.get_child_value(n);
+            GLib.Variant history_list = settings.get_value("history");
+            GLib.Variant history_entry = history_list.get_child_value(n);
             history_entry.get("(xss)", out timestamp, out title, out url);
 
-            time = new GLib.DateTime.from_unix_local(timestamp);
+            GLib.DateTime time = new GLib.DateTime.from_unix_local(timestamp);
 
             if (title == "") title = "Untitled";
             title_label = new Gtk.Label("<b>%s</b>".printf(title.strip()));
@@ -60,14 +41,14 @@ namespace HasteApplet
             title_label.max_width_chars = 23;
             title_label.ellipsize = Pango.EllipsizeMode.END;
 
-            title_edit_button = new Gtk.Button.from_icon_name(
+            Gtk.Button title_edit_button = new Gtk.Button.from_icon_name(
                 "accessories-text-editor-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             title_edit_button.relief = Gtk.ReliefStyle.NONE;
             title_edit_button.can_focus = false;
             title_edit_button.tooltip_text = "Edit Title";
             title_edit_button.get_style_context().add_class("action-button");
 
-            title_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+            Gtk.Box title_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_box.pack_start(title_label, true, true, 0);
             title_box.pack_end(title_edit_button, false, false, 0);
 
@@ -79,60 +60,58 @@ namespace HasteApplet
             title_entry.set_icon_from_icon_name(
                 Gtk.EntryIconPosition.SECONDARY, "edit-clear-symbolic");
             title_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "Clear");
-            title_entry.icon_press.connect(() => {
-                title_entry.text = "";
-            });
+            title_entry.icon_press.connect(() => { title_entry.text = ""; });
 
-            title_apply_button = new Gtk.Button.from_icon_name(
+            Gtk.Button title_apply_button = new Gtk.Button.from_icon_name(
                 "emblem-ok-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             title_apply_button.relief = Gtk.ReliefStyle.NONE;
             title_apply_button.can_focus = false;
             title_apply_button.tooltip_text = "Apply Changes";
             title_apply_button.get_style_context().add_class("action-button");
 
-            title_edit_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+            Gtk.Box title_edit_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_edit_box.pack_start(title_entry, true, true, 0);
             title_edit_box.pack_end(title_apply_button, false, false, 0);
 
-            title_stack = new Gtk.Stack();
+            Gtk.Stack title_stack = new Gtk.Stack();
             title_stack.transition_type = Gtk.StackTransitionType.CROSSFADE;
             title_stack.add_named(title_box, "title_box");
             title_stack.add_named(title_edit_box, "title_edit_box");
 
-            copy_button = new Gtk.Button.from_icon_name(
+            Gtk.Button copy_button = new Gtk.Button.from_icon_name(
                 "edit-copy-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             copy_button.relief = Gtk.ReliefStyle.NONE;
             copy_button.can_focus = false;
             copy_button.tooltip_text = "Copy Haste URL";
             copy_button.get_style_context().add_class("action-button");
 
-            copy_ok_image = new Gtk.Image.from_icon_name(
+            Gtk.Image copy_ok_image = new Gtk.Image.from_icon_name(
                 "emblem-ok-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
 
-            copy_stack = new Gtk.Stack();
-            copy_stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT;
+            Gtk.Stack copy_stack = new Gtk.Stack();
+            copy_stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
             copy_stack.add_named(copy_button, "copy_button");
             copy_stack.add_named(copy_ok_image, "copy_ok_image");
 
-            delete_button = new Gtk.Button.from_icon_name(
+            Gtk.Button delete_button = new Gtk.Button.from_icon_name(
                 "list-remove-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             delete_button.relief = Gtk.ReliefStyle.NONE;
             delete_button.can_focus = false;
             delete_button.tooltip_text = "Delete Haste";
             delete_button.get_style_context().add_class("action-button");
 
-            title_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+            Gtk.Box title_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             title_main_box.pack_start(title_stack, true, true, 0);
             title_main_box.pack_end(delete_button, false, false, 0);
             title_main_box.pack_end(copy_stack, false, false, 0);
 
-            url_label = new Gtk.Label(url);
+            Gtk.Label url_label = new Gtk.Label(url);
             url_label.halign = Gtk.Align.START;
             url_label.get_style_context().add_class("dim-label");
             url_label.max_width_chars = 23;
             url_label.ellipsize = Pango.EllipsizeMode.MIDDLE;
 
-            url_event_box = new Gtk.EventBox();
+            Gtk.EventBox url_event_box = new Gtk.EventBox();
             url_event_box.tooltip_text = "Click to open the link in your browser";
             url_event_box.add(url_label);
             url_event_box.button_press_event.connect(() => {
@@ -144,18 +123,11 @@ namespace HasteApplet
                 return true;
             });
 
-            gnome_settings = new GLib.Settings("org.gnome.desktop.interface");
+            GLib.Settings gnome_settings = new GLib.Settings("org.gnome.desktop.interface");
             string time_format = gnome_settings.get_string("clock-format");
+            string time_text = (time_format == "24h") ? time.format("%H:%M") : time.format("%l:%M %p");
 
-            string? time_text = null;
-
-            if (time_format == "24h") {
-                time_text = time.format("%H:%M");
-            } else if (time_format == "12h") {
-                time_text = time.format("%l:%M %p");
-            }
-
-            time_label = new Gtk.Label(time_text);
+            Gtk.Label time_label = new Gtk.Label(time_text);
             time_label.tooltip_text = time.format("%d %B %Y");
             time_label.valign = Gtk.Align.CENTER;
             time_label.get_style_context().add_class("dim-label");
@@ -163,16 +135,12 @@ namespace HasteApplet
             gnome_settings.changed.connect((key) => {
                 if (key == "clock-format") {
                     time_format = gnome_settings.get_string("clock-format");
-                    if (time_format == "24h") {
-                        time_text = time.format("%H:%M");
-                    } else if (time_format == "12h") {
-                        time_text = time.format("%l:%M %p");
-                    }
+                    time_text = (time_format == "24h") ? time.format("%H:%M") : time.format("%l:%M %p");
                     time_label.label = time_text;
                 }
             });
 
-            url_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+            Gtk.Box url_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
             url_main_box.pack_start(url_event_box, true, true, 0);
             url_main_box.pack_end(time_label, false, false, 0);
 
@@ -183,16 +151,12 @@ namespace HasteApplet
             });
 
             title_apply_button.clicked.connect(() => {
-                if (title_entry.text != title) {
-                    apply_changes(settings);
-                }
+                if (title_entry.text != title) apply_changes(settings);
                 title_stack.visible_child_name = "title_box";
             });
 
             title_entry.activate.connect(() => {
-                if (title_entry.text != title) {
-                    apply_changes(settings);
-                }
+                if (title_entry.text != title) apply_changes(settings);
                 title_stack.visible_child_name = "title_box";
             });
 
@@ -208,16 +172,14 @@ namespace HasteApplet
                 copy_stack.visible_child_name = "copy_ok_image";
                 copy(url);
                 GLib.Timeout.add(500, () => {
-                    copy_stack.set_visible_child_full("copy_button", Gtk.StackTransitionType.SLIDE_RIGHT);
+                    copy_stack.visible_child_name = "copy_button";
                     return false;
                 });
             });
 
-            delete_button.clicked.connect(() => {
-                delete_item(settings);
-            });
+            delete_button.clicked.connect(() => { delete_item(settings); });
 
-            history_view_item_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
+            Gtk.Box history_view_item_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
             history_view_item_box.margin = 5;
             history_view_item_box.pack_start(title_main_box, true, true, 0);
             history_view_item_box.pack_start(url_main_box, true, true, 0);
@@ -229,7 +191,7 @@ namespace HasteApplet
 
         private void delete_item(GLib.Settings settings)
         {
-            history_list = settings.get_value("history");
+            GLib.Variant history_list = settings.get_value("history");
             GLib.Variant[]? history_l = null;
             GLib.Variant? history_entry_curr = null;
 
@@ -254,29 +216,23 @@ namespace HasteApplet
             transition_type = Gtk.RevealerTransitionType.SLIDE_DOWN;
             transition_duration = 150;
 
-            /* The revealer close animation never gets triggered for 
+            /* The revealer close animation never gets triggered for
                the first item in the list for some reason
                so this will destroy the parent without the close animation.
                Might be a GTK+ bug. */
-            notify["child-revealed"].connect_after(() => {
-                get_parent().destroy();
-            });
+            notify["child-revealed"].connect_after(() => { if (get_parent() != null) get_parent().destroy(); });
 
             reveal_child = false;
         }
 
         private void apply_changes(GLib.Settings settings)
         {
-            if (title_entry.text == "") {
-                title = "Untitled";
-            } else {
-                title = title_entry.text.strip();
-            }
+            title = (title_entry.text == "") ? "Untitled" : title_entry.text.strip();
 
             title_label.set_text("<b>%s</b>".printf(title));
             title_label.use_markup = true;
 
-            history_list = settings.get_value("history");
+            GLib.Variant history_list = settings.get_value("history");
             GLib.Variant[]? history_variant_list = null;
             GLib.Variant? history_entry_curr = null;
             GLib.Variant? history_entry_new = null;

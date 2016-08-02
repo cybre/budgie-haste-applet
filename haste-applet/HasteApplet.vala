@@ -60,16 +60,14 @@ namespace HasteApplet
     public class HasteApplet : Budgie.Applet
     {
         Gtk.Popover? popover = null;
-        Gtk.EventBox? box = null;
+        Gtk.EventBox? applet_box = null;
         unowned Budgie.PopoverManager? manager = null;
         protected Settings settings;
-        private Gtk.Image img;
         private Gtk.Label label;
         private Gtk.Stack stack;
         public string uuid { public set ; public get; }
         private HistoryView history_view;
         private NewHasteView new_haste_view;
-        private Gtk.Clipboard clipboard;
 
         private string ARC_STYLE_CSS = """
             .haste-applet separator {
@@ -100,8 +98,8 @@ namespace HasteApplet
 
             settings.changed.connect(on_settings_changed);
 
-            var display = get_display();
-            clipboard = Gtk.Clipboard.get_for_display(display, Gdk.SELECTION_CLIPBOARD);
+            Gdk.Display display = get_display();
+            Gtk.Clipboard clipboard = Gtk.Clipboard.get_for_display(display, Gdk.SELECTION_CLIPBOARD);
 
             Gdk.Screen screen = Gdk.Screen.get_default();
             Gtk.Settings gtk_settings = Gtk.Settings.get_for_screen(screen);
@@ -117,21 +115,17 @@ namespace HasteApplet
                 }
             }
 
-            box = new Gtk.EventBox();
-            img = new Gtk.Image.from_icon_name("edit-paste-symbolic", Gtk.IconSize.MENU);
-            var layout = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
-            layout.pack_start(img, false, false, 3);
+            Gtk.Image icon = new Gtk.Image.from_icon_name("edit-paste-symbolic", Gtk.IconSize.MENU);
             label = new Gtk.Label("Haste");
             label.halign = Gtk.Align.START;
+            Gtk.Box layout = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+            layout.pack_start(icon, false, false, 3);
             layout.pack_start(label, true, true, 3);
-            box.add(layout);
-            add(box);
+            applet_box = new Gtk.EventBox();
+            applet_box.add(layout);
 
-            popover = new Gtk.Popover(box);
-            popover.get_style_context().add_class("haste-applet");
             stack = new Gtk.Stack();
-
-            popover.map.connect(entry_hack);
+            stack.transition_type = Gtk.StackTransitionType.SLIDE_LEFT_RIGHT;
 
             new_haste_view = new NewHasteView(stack);
             history_view = new HistoryView(settings, clipboard);
@@ -139,33 +133,38 @@ namespace HasteApplet
             new_haste_view.history_view = history_view;
 
             history_view.history_add_button.clicked.connect(() => {
-                stack.set_visible_child_full("new_haste_view", Gtk.StackTransitionType.SLIDE_LEFT);
+                stack.visible_child_name = "new_haste_view";
                 new_haste_view.textview.grab_focus();
             });
 
             stack.add_named(history_view, "history_view");
             stack.add_named(new_haste_view, "new_haste_view");
             stack.homogeneous = false;
-
             stack.show_all();
-            popover.add(stack);
 
-            box.button_press_event.connect((e)=> {
+            popover = new Gtk.Popover(applet_box);
+            popover.get_style_context().add_class("haste-applet");
+            popover.add(stack);
+            popover.map.connect(entry_hack);
+
+            applet_box.button_press_event.connect((e)=> {
                 if (popover.get_visible()) {
                     popover.hide();
                 } else {
+                    string child_name = "";
                     if (e.button == 1) {
                         if (new_haste_view.is_editing) {
-                            stack.visible_child_name = "new_haste_view";
+                            child_name = "new_haste_view";
                         } else {
-                            stack.visible_child_name = "history_view";
+                            child_name = "history_view";
                         }
                     } else if (e.button == 3) {
-                        stack.visible_child_name = "new_haste_view";
+                        child_name = "new_haste_view";
                     } else {
                         return Gdk.EVENT_PROPAGATE;
                     }
-                    manager.show_popover(box);
+                    stack.visible_child_name = child_name;
+                    manager.show_popover(applet_box);
                 }
                 return Gdk.EVENT_STOP;
             });
@@ -175,6 +174,7 @@ namespace HasteApplet
                 history_view.update_history(i, true);
             }
 
+            add(applet_box);
             show_all();
 
             on_settings_changed("enable-label");
@@ -186,23 +186,16 @@ namespace HasteApplet
         {
             if (stack.visible_child_name == "new_haste_view") {
                 new_haste_view.title_entry.can_focus = false;
-                yield sleep_async(1);
-                new_haste_view.title_entry.can_focus = true;
+                GLib.Timeout.add(1, () => {
+                    new_haste_view.title_entry.can_focus = true;
+                    return false;
+                });
             }
-        }
-
-        private async void sleep_async(int timeout)
-        {
-            uint timeout_src = 0;
-            timeout_src = GLib.Timeout.add(timeout, sleep_async.callback);
-            yield;
-            GLib.Source.remove(timeout_src);
         }
 
         protected void on_settings_changed(string key)
         {
-            switch (key)
-            {
+            switch (key) {
                 case "enable-label":
                     label.set_visible(settings.get_boolean(key));
                     break;
@@ -230,13 +223,14 @@ namespace HasteApplet
 
         public override void update_popovers(Budgie.PopoverManager? manager)
         {
-            manager.register_popover(box, popover);
+            manager.register_popover(applet_box, popover);
             this.manager = manager;
         }
     }
 }
 
-bool is_the_url_valid(string url, out string new_url) {
+bool is_the_url_valid(string url, out string new_url)
+{
     new_url = "";
     if (url != "") {
         string[] ha_split = url.split("://");

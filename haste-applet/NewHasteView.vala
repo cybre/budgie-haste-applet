@@ -13,18 +13,15 @@ namespace HasteApplet
 {
     public class NewHasteView : Gtk.Grid
     {
-        private Gtk.Button header_back_button;
-        private Gtk.Box header_box;
-        private Gtk.ScrolledWindow scroller;
         private Gtk.TextBuffer textbuffer;
         private Gtk.TextIter? start_iter = null;
         private Gtk.TextIter? end_iter = null;
         private Gtk.Revealer error_message_revealer;
         private Gtk.Label error_message_label;
-        private string? text = null;
         public Gtk.Entry title_entry;
         public Gtk.TextView textview;
         public Gtk.Button post_button;
+        private string? text = null;
         public string haste_address { set; get; default = "hastebin.com"; }
         public bool is_editing { set; get; default = false; }
         public bool haste_address_invalid { set; get; default = false; }
@@ -34,14 +31,12 @@ namespace HasteApplet
             row_spacing = 5;
             border_width = 5;
 
-            header_back_button = new Gtk.Button.from_icon_name(
+            Gtk.Button header_back_button = new Gtk.Button.from_icon_name(
                 "go-previous-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
             header_back_button.can_focus = false;
             header_back_button.tooltip_text = "Back";
 
-            header_back_button.clicked.connect(() => {
-                stack.set_visible_child_full("history_view", Gtk.StackTransitionType.SLIDE_RIGHT);
-            });
+            header_back_button.clicked.connect(() => { stack.visible_child_name = "history_view"; });
 
             title_entry = new Gtk.Entry();
             title_entry.placeholder_text = "Title (Optional)";
@@ -49,31 +44,24 @@ namespace HasteApplet
             title_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "edit-clear-symbolic");
             title_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "Clear");
 
-            title_entry.icon_press.connect(() => {
-                title_entry.text = "";
-            });
+            title_entry.icon_press.connect(() => { title_entry.text = ""; });
 
-            header_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 5);
+            Gtk.Box header_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 5);
             header_box.pack_start(header_back_button, false, false, 0);
             header_box.pack_start(title_entry, true, true, 0);
 
             textview = new Gtk.TextView();
-            textview.top_margin = 10;
-            textview.bottom_margin = 10;
-            textview.left_margin = 10;
-            textview.right_margin = 10;
-            textview.editable = true;
-            textview.monospace = true;
+            textview.top_margin = textview.bottom_margin = 10;
+            textview.left_margin = textview.right_margin = 10;
+            textview.editable = textview.monospace = true;
 
-            scroller = new Gtk.ScrolledWindow(null, null);
+            Gtk.ScrolledWindow scroller = new Gtk.ScrolledWindow(null, null);
             scroller.shadow_type = Gtk.ShadowType.IN;
-            scroller.width_request = 330;
-            scroller.height_request = 330;
+            scroller.width_request = scroller.height_request = 330;
             scroller.add(textview);
 
             post_button = new Gtk.Button.with_label("Haste it!");
-            post_button.sensitive = false;
-            post_button.can_focus = false;
+            post_button.sensitive = post_button.can_focus = false;
             post_button.get_child().margin = 5;
 
             textbuffer = textview.get_buffer();
@@ -104,9 +92,7 @@ namespace HasteApplet
 
             Soup.Session session = new Soup.Session();
 
-            post_button.clicked.connect(() => {
-                upload_haste(session, stack);
-            });
+            post_button.clicked.connect(() => { upload_haste(session, stack); });
 
             error_message_label = new Gtk.Label("");
             error_message_label.get_style_context().add_class("dim-label");
@@ -126,8 +112,8 @@ namespace HasteApplet
         {
             dismiss_error_message();
             post_button.label = "Hasting...";
-            title_entry.sensitive = false;
-            textview.sensitive = false;
+            title_entry.sensitive = textview.sensitive = false;
+
             string url = "http://%s/documents".printf(haste_address);
             Soup.Message message = new Soup.Message("POST", url);
 
@@ -153,22 +139,18 @@ namespace HasteApplet
 
                 if (link == "" || link.length > 30) {
                     show_error_message("Error. Connection to server failed.");
-                    post_button.label = "Haste it!";
-                    title_entry.sensitive = true;
-                    textview.sensitive = true;
                 } else {
                     dismiss_error_message();
-                    post_button.label = "Haste it!";
-                    title_entry.sensitive = true;
-                    textview.sensitive = true;
                     link = "%s/%s".printf(haste_address, link);
                     history_view.add_to_history(link, title_entry.text);
                     textbuffer.set_text("", 0);
                     title_entry.text = "";
-                    stack.set_visible_child_full("history_view", Gtk.StackTransitionType.SLIDE_RIGHT);
+                    stack.visible_child_name = "history_view";
                 }
             });
 
+            post_button.label = "Haste it!";
+            title_entry.sensitive = textview.sensitive = true;
             post_button.get_child().margin = 5;
         }
 
@@ -176,15 +158,13 @@ namespace HasteApplet
         {
             error_message_label.label = message;
             error_message_label.visible = true;
-            error_message_revealer.visible = true;
-            error_message_revealer.reveal_child = true;
+            error_message_revealer.reveal_child = error_message_revealer.visible = true;
         }
 
         public void dismiss_error_message()
         {
             error_message_label.label = "";
-            error_message_revealer.reveal_child = false;
-            error_message_revealer.visible = false;
+            error_message_revealer.visible = error_message_revealer.reveal_child = false;
         }
     }
 }
