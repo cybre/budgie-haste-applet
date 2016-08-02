@@ -74,6 +74,7 @@ namespace HasteApplet
             post_button = new Gtk.Button.with_label("Haste it!");
             post_button.sensitive = false;
             post_button.can_focus = false;
+            post_button.get_child().margin = 5;
 
             textbuffer = textview.get_buffer();
 
@@ -167,6 +168,8 @@ namespace HasteApplet
                     stack.set_visible_child_full("history_view", Gtk.StackTransitionType.SLIDE_RIGHT);
                 }
             });
+
+            post_button.get_child().margin = 5;
         }
 
         public void show_error_message(string message)

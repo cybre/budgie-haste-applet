@@ -71,13 +71,17 @@ namespace HasteApplet
         private NewHasteView new_haste_view;
         private Gtk.Clipboard clipboard;
 
-        public override Gtk.Widget? get_settings_ui()
-        {
+        private string ARC_STYLE_CSS = """
+            .haste-applet separator {
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+        """;
+
+        public override Gtk.Widget? get_settings_ui() {
             return new HasteAppletSettings(get_applet_settings(uuid));
         }
 
-        public override bool supports_settings()
-        {
+        public override bool supports_settings() {
             return true;
         }
 
@@ -95,6 +99,20 @@ namespace HasteApplet
             var display = get_display();
             clipboard = Gtk.Clipboard.get_for_display(display, Gdk.SELECTION_CLIPBOARD);
 
+            Gdk.Screen screen = Gdk.Screen.get_default();
+            Gtk.Settings gtk_settings = Gtk.Settings.get_for_screen(screen);
+            string gtk_theme_name = gtk_settings.gtk_theme_name.down();
+
+            if (gtk_theme_name.has_prefix("arc-")) {
+                Gtk.CssProvider provider = new Gtk.CssProvider();
+                try {
+                    provider.load_from_data(ARC_STYLE_CSS, ARC_STYLE_CSS.length);
+                    Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+                } catch (Error e) {
+                    warning(e.message);
+                }
+            }
+
             box = new Gtk.EventBox();
             img = new Gtk.Image.from_icon_name("edit-paste-symbolic", Gtk.IconSize.MENU);
             var layout = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
@@ -106,6 +124,7 @@ namespace HasteApplet
             add(box);
 
             popover = new Gtk.Popover(box);
+            popover.get_style_context().add_class("haste-applet");
             stack = new Gtk.Stack();
 
             popover.map.connect(entry_hack);

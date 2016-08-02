@@ -133,8 +133,8 @@ namespace HasteApplet
             url_event_box.add(url_label);
             url_event_box.button_press_event.connect(() => {
                 try {
-                    GLib.Process.spawn_command_line_async("xdg-open http://%s".printf(url));
-                } catch (GLib.SpawnError e) {
+                    Gtk.show_uri(Gdk.Screen.get_default(), @"http://$url", Gdk.CURRENT_TIME);
+                } catch (GLib.Error e) {
                     stderr.printf(e.message);
                 }
                 return true;
@@ -214,10 +214,7 @@ namespace HasteApplet
             });
 
             history_view_item_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 0);
-            history_view_item_box.margin_top = 5;
-            history_view_item_box.margin_bottom = 5;
-            history_view_item_box.margin_start = 10;
-            history_view_item_box.margin_end = 10;
+            history_view_item_box.margin = 5;
             history_view_item_box.pack_start(title_main_box, true, true, 0);
             history_view_item_box.pack_start(url_main_box, true, true, 0);
 

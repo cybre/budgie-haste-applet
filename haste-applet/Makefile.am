@@ -60,5 +60,5 @@ libhasteapplet_la_VALAFLAGS = \
 
 gsettings_SCHEMAS = \
 	com.github.cybre.haste-applet.gschema.xml
-	
+
 @GSETTINGS_RULES@
