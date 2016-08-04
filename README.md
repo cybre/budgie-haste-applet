@@ -1,4 +1,4 @@
-# haste-applet
+# budgie-haste-applet
 A Budgie applet for pasting text to any haste server.
 
 ---
@@ -24,9 +24,9 @@ make
 sudo make install
 ```
 #### Solus
-You can install haste-applet from the Software Centre or via the command line:
+You can install budgie-haste-applet from the Software Centre or via the command line:
 ```
-sudo eopkg it haste-applet
+sudo eopkg it budgie-haste-applet
 ```
 
 #### Arch Linux
