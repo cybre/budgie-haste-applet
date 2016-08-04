@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>budgie-haste-applet</id>
+  <pkgname>budgie-haste-applet</pkgname>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <extends>budgie-desktop.desktop</extends>
+  <name>Haste Applet</name>
+  <summary>A code snippet sharing tool for the Budgie Desktop</summary>
+  <description>
+    <p>
+    Haste Applet is a Budgie Desktop applet for sharing code snippets over the Internet.
+    It can connect to any haste-server instance so you can use your own with this applet.
+    It lives in your panel and features a clean interface for quickly sharing code snippets.
+    </p>
+    <p>
+    Among other things, Haste Applet can:
+    </p>
+    <ul>
+      <li>Share code and plain text documents</li>
+      <li>Upload your snippets to any haste-server instance</li>
+      <li>Keep a history of your snippets (with editable titles)</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/cybre/budgie-haste-applet/master/screenshot.png</image>
+      <caption>The start and history pages</caption>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/cybre/budgie-haste-applet</url>
+  <url type="bugtracker">https://github.com/cybre/budgie-haste-applet/issues</url>
+  <updatecontact>stfric369@gmail.com</updatecontact>
+</component>

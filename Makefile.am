@@ -1,2 +1,3 @@
 SUBDIRS = \
-	haste-applet
+	data \
+	budgie-haste-applet
