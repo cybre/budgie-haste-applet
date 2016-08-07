@@ -112,7 +112,7 @@ namespace HasteApplet
         {
             dismiss_error_message();
             post_button.label = "Hasting...";
-            title_entry.sensitive = textview.sensitive = false;
+            title_entry.sensitive = textview.sensitive = post_button.sensitive = false;
 
             string url = "http://%s/documents".printf(haste_address);
             Soup.Message message = new Soup.Message("POST", url);
@@ -147,10 +147,11 @@ namespace HasteApplet
                     title_entry.text = "";
                     stack.visible_child_name = "history_view";
                 }
-            });
 
-            post_button.label = "Haste it!";
-            title_entry.sensitive = textview.sensitive = true;
+                post_button.label = "Haste it!";
+                title_entry.sensitive = textview.sensitive = post_button.sensitive = true;
+                post_button.get_child().margin = 5;
+            });
             post_button.get_child().margin = 5;
         }
 
