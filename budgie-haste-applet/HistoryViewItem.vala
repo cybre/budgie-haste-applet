@@ -105,7 +105,8 @@ namespace HasteApplet
             title_main_box.pack_end(delete_button, false, false, 0);
             title_main_box.pack_end(copy_stack, false, false, 0);
 
-            Gtk.Label url_label = new Gtk.Label(url);
+            string display_url = url.split("://")[1];
+            Gtk.Label url_label = new Gtk.Label(display_url);
             url_label.halign = Gtk.Align.START;
             url_label.get_style_context().add_class("dim-label");
             url_label.max_width_chars = 23;
@@ -116,7 +117,7 @@ namespace HasteApplet
             url_event_box.add(url_label);
             url_event_box.button_press_event.connect(() => {
                 try {
-                    Gtk.show_uri(Gdk.Screen.get_default(), @"http://$url", Gdk.CURRENT_TIME);
+                    Gtk.show_uri(Gdk.Screen.get_default(), url, Gdk.CURRENT_TIME);
                 } catch (GLib.Error e) {
                     stderr.printf(e.message);
                 }

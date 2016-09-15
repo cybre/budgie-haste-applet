@@ -23,6 +23,7 @@ namespace HasteApplet
         public Gtk.Button post_button;
         private string? text = null;
         public string haste_address { set; get; default = "hastebin.com"; }
+        public string protocol { set; get; default = "http"; }
         public bool is_editing { set; get; default = false; }
         public bool haste_address_invalid { set; get; default = false; }
         public HistoryView history_view;
@@ -91,6 +92,7 @@ namespace HasteApplet
             });
 
             Soup.Session session = new Soup.Session();
+            session.ssl_strict = false;
 
             post_button.clicked.connect(() => { upload_haste(session, stack); });
 
@@ -114,7 +116,11 @@ namespace HasteApplet
             post_button.label = "Hasting...";
             title_entry.sensitive = textview.sensitive = post_button.sensitive = false;
 
-            string url = "http://%s/documents".printf(haste_address);
+            if (haste_address.has_suffix("/")) {
+                haste_address = haste_address[0:haste_address.length - 1];
+            }
+
+            string url = "%s://%s/documents".printf(protocol, haste_address);
             Soup.Message message = new Soup.Message("POST", url);
 
             Soup.MemoryUse buffer = Soup.MemoryUse.COPY;
@@ -137,11 +143,14 @@ namespace HasteApplet
                     title = title_entry.text;
                 }
 
+                stdout.printf ("Data: \n%s\n", (string) mess.response_body.data);
+                stdout.printf ("Status Code: %u\n", mess.status_code);
+
                 if (link == "" || link.length > 30) {
                     show_error_message("Error. Connection to server failed.");
                 } else {
                     dismiss_error_message();
-                    link = "%s/%s".printf(haste_address, link);
+                    link = "%s://%s/%s".printf(protocol, haste_address, link);
                     history_view.add_to_history(link, title_entry.text);
                     textbuffer.set_text("", 0);
                     title_entry.text = "";

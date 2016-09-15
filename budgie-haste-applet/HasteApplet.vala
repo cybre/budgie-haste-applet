@@ -38,13 +38,13 @@ public class HasteAppletSettings : Gtk.Grid
         settings.bind("enable-label", switch_label, "active", SettingsBindFlags.DEFAULT);
         settings.bind("haste-address", entry_address, "text", SettingsBindFlags.DEFAULT);
 
-        if (!is_the_url_valid(settings.get_string("haste-address"), null)) {
+        if (!is_the_url_valid(settings.get_string("haste-address"), null, null)) {
             entry_address.secondary_icon_name = "dialog-error-symbolic";
             entry_address.get_style_context().add_class("error");
         }
 
         settings.changed.connect(() => {
-            if (is_the_url_valid(settings.get_string("haste-address"), null)) {
+            if (is_the_url_valid(settings.get_string("haste-address"), null, null)) {
                 entry_address.secondary_icon_name = null;
                 entry_address.get_style_context().remove_class("error");
             } else {
@@ -178,7 +178,6 @@ namespace HasteApplet
             show_all();
 
             on_settings_changed("enable-label");
-            on_settings_changed("enable-history");
             on_settings_changed("haste-address");
         }
 
@@ -201,11 +200,18 @@ namespace HasteApplet
                     break;
                 case "haste-address":
                     string new_url;
-                    if (is_the_url_valid(settings.get_string(key), out new_url)) {
+                    string? protocol = null;
+                    if (is_the_url_valid(settings.get_string(key), out new_url, out protocol)) {
                         if (new_haste_view.haste_address_invalid) {
                             new_haste_view.dismiss_error_message();
                             new_haste_view.post_button.sensitive = true;
                             new_haste_view.haste_address_invalid = false;
+                        }
+
+                        if (protocol != null && protocol != "") {
+                            settings.set_string("protocol", protocol);
+                        } else {
+                            settings.set_string("protocol", "http");
                         }
                         new_haste_view.haste_address = new_url;
                     } else {
@@ -215,6 +221,9 @@ namespace HasteApplet
                             new_haste_view.haste_address_invalid = true;
                         }
                     }
+                    break;
+                case "protocol":
+                    new_haste_view.protocol = settings.get_string(key);
                     break;
                 default:
                     break;
@@ -229,11 +238,14 @@ namespace HasteApplet
     }
 }
 
-bool is_the_url_valid(string url, out string new_url)
+bool is_the_url_valid(string url, out string new_url, out string protocol)
 {
     new_url = "";
     if (url != "") {
         string[] ha_split = url.split("://");
+        if (ha_split.length > 1) {
+            protocol = ha_split[0];
+        }
         string[]? ha_split2 = null;
         if (ha_split[1] != null) {
             ha_split2 = ha_split[1].split("/");
