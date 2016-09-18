@@ -126,7 +126,7 @@ namespace HasteApplet
                 });
             }
 
-            history_view_item.copy.connect((url) => { clipboard.set_text(@"http://$url", -1); });
+            history_view_item.copy.connect((url) => { clipboard.set_text(url, -1); });
 
             history_view_item.deletion.connect(() => {
                 int index = parent.get_index();
