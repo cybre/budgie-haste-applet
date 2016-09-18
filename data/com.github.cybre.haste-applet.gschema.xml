@@ -18,5 +18,11 @@
       <summary>haste-server Address</summary>
       <description>The haste-server address to use for pasting.</description>
     </key>
+
+    <key type="s" name="protocol">
+      <default>'http'</default>
+      <summary>haste-server protocol</summary>
+      <description>The haste-server protocol to use.</description>
+    </key>
   </schema>
 </schemalist>
