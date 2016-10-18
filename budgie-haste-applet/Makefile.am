@@ -1,5 +1,8 @@
 plugindir = $(libdir)/budgie-desktop/plugins
 
+EXTRA_DIST = \
+	HasteApplet.plugin
+
 hasteappletdir = $(plugindir)/budgie-haste-applet
 
 hasteapplet_DATA = \
