@@ -1,0 +1,18 @@
+.haste-applet separator {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.haste-applet,
+.haste-applet .action-button {
+    padding: 0;
+}
+
+.haste-applet row {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.haste-applet .bottom-button {
+    border-radius: 0 0 4px 4px;
+    border: 0;
+}

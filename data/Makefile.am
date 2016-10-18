@@ -9,7 +9,8 @@ EXTRA_DIST = \
 	$(gsettings_SCHEMAS) \
 	com.github.cybre.haste-applet.gschema.xml \
 	plugin.gresource.xml \
-	settings.ui
+	settings.ui \
+	style.css
 
 plugin_resources = $(shell glib-compile-resources --sourcedir=$(top_srcdir)/data --generate-dependencies $(top_srcdir)/data/plugin.gresource.xml)
 
