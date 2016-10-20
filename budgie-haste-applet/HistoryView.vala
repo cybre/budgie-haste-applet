@@ -32,7 +32,7 @@ public class HasteApplet.HistoryView : Gtk.Box
         header_label.set_halign(Gtk.Align.START);
         header_label.get_style_context().add_class("dim-label");
 
-        history_add_button = new Gtk.Button.with_label("Add");
+        history_add_button = new Gtk.Button.with_label(_("Add"));
         history_add_button.set_tooltip_text(_("Add a new haste"));
         history_add_button.set_can_focus(false);
 
