@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: budgie-haste-applet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 23:09+0200\n"
-"PO-Revision-Date: 2016-10-20 21:16+0000\n"
+"POT-Creation-Date: 2016-10-20 23:35+0200\n"
+"PO-Revision-Date: 2016-10-20 21:36+0000\n"
 "Last-Translator: Stefan Ric (cybre) <stfric369@gmail.com>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/cybres-budgie-applets/budgie-haste-applet/language/sr_RS@latin/)\n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,10 @@ msgstr "Otvori hejst"
 #: ../budgie-haste-applet/HistoryView.vala:30
 msgid "Recent Hastes"
 msgstr "Nedavni hejstovi"
+
+#: ../budgie-haste-applet/HistoryView.vala:35
+msgid "Add"
+msgstr "Dodaj"
 
 #: ../budgie-haste-applet/HistoryView.vala:36
 msgid "Add a new haste"
