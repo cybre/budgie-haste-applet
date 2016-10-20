@@ -58,7 +58,7 @@ public class HasteApplet.NewHasteView : Gtk.Grid
         scroller.set_size_request(330, 330);
         scroller.add(textview);
 
-        post_button = new Gtk.Button.with_label("Haste it!");
+        post_button = new Gtk.Button.with_label(_("Post it!"));
         post_button.set_sensitive(false);
         post_button.set_can_focus(false);
         post_button.get_child().margin = 5;

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: budgie-haste-applet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 23:35+0200\n"
-"PO-Revision-Date: 2016-10-20 21:36+0000\n"
+"POT-Creation-Date: 2016-10-20 23:54+0200\n"
+"PO-Revision-Date: 2016-10-20 21:55+0000\n"
 "Last-Translator: Stefan Ric (cybre) <stfric369@gmail.com>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/cybres-budgie-applets/budgie-haste-applet/language/sr_RS@latin/)\n"
 "MIME-Version: 1.0\n"
@@ -87,6 +87,10 @@ msgstr "Vaši hejstovi će biti prikazani ovde"
 #: ../budgie-haste-applet/NewHasteView.vala:40
 msgid "Title (Optional)"
 msgstr "Naslov (Opcionalno)"
+
+#: ../budgie-haste-applet/NewHasteView.vala:61
+msgid "Post it!"
+msgstr "Postavi!"
 
 #: ../data/settings.ui.h:1
 msgid "Show Label"
