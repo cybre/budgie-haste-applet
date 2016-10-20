@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Stefan Ric (cybre) <stfric369@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: budgie-haste-applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-20 23:09+0200\n"
+"PO-Revision-Date: 2016-10-20 21:16+0000\n"
+"Last-Translator: Stefan Ric (cybre) <stfric369@gmail.com>\n"
+"Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/cybres-budgie-applets/budgie-haste-applet/language/sr_RS@latin/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sr_RS@latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../budgie-haste-applet/HasteApplet.vala:35
+msgid "The URL is invalid"
+msgstr "URL nije validan"
+
+#: ../budgie-haste-applet/HasteApplet.vala:108
+msgid "Hastes"
+msgstr "Hejstovi"
+
+#: ../budgie-haste-applet/HasteApplet.vala:208
+msgid "Invalid haste-server Address"
+msgstr "haste-server adresa nije validna"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:35
+#: ../budgie-haste-applet/HistoryViewItem.vala:229
+#: ../budgie-haste-applet/HistoryView.vala:160
+msgid "Untitled"
+msgstr "Bez naslova"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:46
+msgid "Edit title"
+msgstr "Izmeni naslov"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:54
+msgid "New title"
+msgstr "Novi naslov"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:60
+msgid "Clear"
+msgstr "Očisti"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:67
+msgid "Apply changes"
+msgstr "Potvrdi promene"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:83
+msgid "Copy URL"
+msgstr "Kopiraj URL"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:98
+msgid "Delete haste"
+msgstr "Obriši hejst"
+
+#: ../budgie-haste-applet/HistoryViewItem.vala:114
+msgid "Open haste"
+msgstr "Otvori hejst"
+
+#: ../budgie-haste-applet/HistoryView.vala:30
+msgid "Recent Hastes"
+msgstr "Nedavni hejstovi"
+
+#: ../budgie-haste-applet/HistoryView.vala:36
+msgid "Add a new haste"
+msgstr "Dodaj novi hejst"
+
+#: ../budgie-haste-applet/HistoryView.vala:56
+msgid "Clear all Hastes"
+msgstr "Obriši sve hejstove"
+
+#: ../budgie-haste-applet/HistoryView.vala:71
+msgid "Your hastes will show up here"
+msgstr "Vaši hejstovi će biti prikazani ovde"
+
+#: ../budgie-haste-applet/NewHasteView.vala:40
+msgid "Title (Optional)"
+msgstr "Naslov (Opcionalno)"
+
+#: ../data/settings.ui.h:1
+msgid "Show Label"
+msgstr "Prikaži oznaku"
+
+#: ../data/settings.ui.h:2
+msgid "haste-server Address"
+msgstr "haste-server Adresa"
+
+#: ../data/settings.ui.h:3
+msgid "Include the protocol for https support"
+msgstr "Uključite i protokol za https podršku"

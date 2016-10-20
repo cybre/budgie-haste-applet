@@ -22,7 +22,9 @@ libhasteapplet_la_SOURCES = \
 
 libhasteapplet_la_CFLAGS = \
 	$(BUDGIE_PLUGIN_CFLAGS) \
-	$(SOUP_CFLAGS)
+	$(SOUP_CFLAGS) \
+	-DPACKAGE_LOCALEDIR=\""$(datadir)/locale"\" \
+	-include $(CONFIG_HEADER)
 
 libhasteapplet_la_LIBADD = \
 	$(BUDGIE_PLUGIN_LIBS) \
@@ -37,5 +39,7 @@ libhasteapplet_la_LDFLAGS = \
 libhasteapplet_la_VALAFLAGS = \
 	--pkg budgie-1.0 \
 	--pkg libsoup-2.4 \
+	--vapidir ${top_srcdir}/vapi \
+	--pkg config \
 	--gresources=${top_srcdir}/data/plugin.gresource.xml \
 	--target-glib=2.38

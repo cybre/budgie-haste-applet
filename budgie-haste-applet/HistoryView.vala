@@ -27,13 +27,13 @@ public class HasteApplet.HistoryView : Gtk.Box
         this.settings = settings;
         this.clipboard = clipboard;
 
-        Gtk.Label header_label = new Gtk.Label("<span font=\"11\">Recent Hastes</span>");
+        Gtk.Label header_label = new Gtk.Label("<span font=\"11\">%s</span>".printf(_("Recent Hastes")));
         header_label.set_use_markup(true);
         header_label.set_halign(Gtk.Align.START);
         header_label.get_style_context().add_class("dim-label");
 
         history_add_button = new Gtk.Button.with_label("Add");
-        history_add_button.set_tooltip_text("Add a new haste");
+        history_add_button.set_tooltip_text(_("Add a new haste"));
         history_add_button.set_can_focus(false);
 
         Gtk.Box header_sub_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
@@ -53,7 +53,7 @@ public class HasteApplet.HistoryView : Gtk.Box
         history_scroller.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         history_scroller.add(history_listbox);
 
-        clear_all_button = new Gtk.Button.with_label("Clear all Hastes");
+        clear_all_button = new Gtk.Button.with_label(_("Clear all Hastes"));
         clear_all_button.get_child().margin = 5;
         clear_all_button.get_child().set_margin_start(0);
         clear_all_button.clicked.connect(clear_all);
@@ -68,7 +68,7 @@ public class HasteApplet.HistoryView : Gtk.Box
         Gtk.Image placeholder_image = new Gtk.Image.from_icon_name(
             "action-unavailable-symbolic", Gtk.IconSize.DIALOG);
         placeholder_image.set_pixel_size(64);
-        Gtk.Label placeholder_label = new Gtk.Label("<big>Nothing to see here</big>");
+        Gtk.Label placeholder_label = new Gtk.Label("<big>%s</big>".printf(_("Your hastes will show up here")));
         placeholder_label.set_use_markup(true);
         Gtk.Box placeholder_box = new Gtk.Box(Gtk.Orientation.VERTICAL, 6);
         placeholder_box.margin = 40;
@@ -157,7 +157,7 @@ public class HasteApplet.HistoryView : Gtk.Box
 
         GLib.DateTime datetime = new GLib.DateTime.now_local();
         int64 timestamp = datetime.to_unix();
-        if (title == "") title = "Untitled";
+        if (title == "") title = _("Untitled");
 
         GLib.Variant timestamp_variant = new GLib.Variant.int64(timestamp);
         GLib.Variant title_variant = new GLib.Variant.string(title);

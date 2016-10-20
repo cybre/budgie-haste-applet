@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[budgie-haste-applet.budgie-haste-appletpot]
+file_filter = po/<lang>.po
+source_file = po/budgie-haste-applet.pot
+source_lang = en
+type = PO

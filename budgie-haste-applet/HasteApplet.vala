@@ -32,7 +32,7 @@ public class HasteApplet.HasteAppletSettings : Gtk.Grid
     {
         entry_address.set_input_purpose(Gtk.InputPurpose.URL);
         entry_address.set_icon_activatable(Gtk.EntryIconPosition.SECONDARY, false);
-        entry_address.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "The URL is invalid.");
+        entry_address.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("The URL is invalid"));
 
         this.settings = settings;
         settings.bind("enable-label", switch_label, "active", SettingsBindFlags.DEFAULT);
@@ -79,6 +79,11 @@ public class HasteApplet.HasteApplet : Budgie.Applet
     {
         Object(uuid: uuid);
 
+        Intl.setlocale(LocaleCategory.ALL, "");
+        Intl.bindtextdomain(Config.GETTEXT_PACKAGE, Config.PACKAGE_LOCALEDIR);
+        Intl.bind_textdomain_codeset(Config.GETTEXT_PACKAGE, "UTF-8");
+        Intl.textdomain(Config.GETTEXT_PACKAGE);
+
         settings_schema = "com.github.cybre.haste-applet";
         settings_prefix = "/com/github/cybre/haste-applet";
 
@@ -100,7 +105,7 @@ public class HasteApplet.HasteApplet : Budgie.Applet
         }
 
         Gtk.Image icon = new Gtk.Image.from_icon_name("edit-paste-symbolic", Gtk.IconSize.MENU);
-        label = new Gtk.Label("Haste");
+        label = new Gtk.Label(_("Hastes"));
         label.set_halign(Gtk.Align.START);
         Gtk.Box layout = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
         layout.pack_start(icon, false, false, 3);
@@ -200,7 +205,7 @@ public class HasteApplet.HasteApplet : Budgie.Applet
                     new_haste_view.haste_address = new_url;
                 } else {
                     if (!new_haste_view.haste_address_invalid) {
-                        new_haste_view.show_error_message("Invalid haste-server Address");
+                        new_haste_view.show_error_message(_("Invalid haste-server Address"));
                         new_haste_view.post_button.set_sensitive(false);
                         new_haste_view.haste_address_invalid = true;
                     }

@@ -28,11 +28,20 @@ PKG_CHECK_MODULES(SOUP,
 # Required only for Vala applets.
 AM_PROG_VALAC([0.28], [], [AC_MSG_ERROR([valac is required to build Vala applets])])
 
+IT_PROG_INTLTOOL([0.50.0])
+GETTEXT_PACKAGE=budgie-haste-applet
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE",
+                   [The prefix for our gettext translation domains.])
+
 AC_CONFIG_FILES([Makefile
                  budgie-haste-applet/Makefile
-                 data/Makefile])
+                 data/Makefile
+                 po/Makefile.in])
 
 AC_OUTPUT
+
+AM_GLIB_GNU_GETTEXT
 
 AC_MSG_RESULT([
         budgie-haste-applet $VERSION

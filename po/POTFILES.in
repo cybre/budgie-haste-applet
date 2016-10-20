@@ -1,0 +1,7 @@
+budgie-haste-applet/HasteApplet.vala
+budgie-haste-applet/HistoryViewItem.vala
+budgie-haste-applet/HistoryView.vala
+budgie-haste-applet/NewHasteView.vala
+
+[type: gettext/glade]data/settings.ui
+

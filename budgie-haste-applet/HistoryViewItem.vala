@@ -32,7 +32,7 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
 
         GLib.DateTime time = new GLib.DateTime.from_unix_local(timestamp);
 
-        if (title == "") title = "Untitled";
+        if (title == "") title = _("Untitled");
         title_label = new Gtk.Label("<b>%s</b>".printf(title.strip()));
         title_label.set_use_markup(true);
         title_label.set_halign(Gtk.Align.START);
@@ -43,7 +43,7 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
             "accessories-text-editor-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         title_edit_button.set_relief(Gtk.ReliefStyle.NONE);
         title_edit_button.set_can_focus(false);
-        title_edit_button.set_tooltip_text("Edit Title");
+        title_edit_button.set_tooltip_text(_("Edit title"));
         title_edit_button.get_style_context().add_class("action-button");
 
         Gtk.Box title_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
@@ -51,20 +51,20 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
         title_box.pack_end(title_edit_button, false, false, 0);
 
         title_entry = new Gtk.Entry();
-        title_entry.set_placeholder_text("New Title");
+        title_entry.set_placeholder_text(_("New title"));
         title_entry.set_max_length(50);
         title_entry.set_margin_end(10);
 
         title_entry.set_icon_from_icon_name(
             Gtk.EntryIconPosition.SECONDARY, "edit-clear-symbolic");
-        title_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "Clear");
+        title_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("Clear"));
         title_entry.icon_press.connect(() => { title_entry.set_text(""); });
 
         Gtk.Button title_apply_button = new Gtk.Button.from_icon_name(
             "emblem-ok-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         title_apply_button.set_relief(Gtk.ReliefStyle.NONE);
         title_apply_button.set_can_focus(false);
-        title_apply_button.set_tooltip_text("Apply Changes");
+        title_apply_button.set_tooltip_text(_("Apply changes"));
         title_apply_button.get_style_context().add_class("action-button");
 
         Gtk.Box title_edit_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
@@ -80,7 +80,7 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
             "edit-copy-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         copy_button.set_relief(Gtk.ReliefStyle.NONE);
         copy_button.set_can_focus(false);
-        copy_button.set_tooltip_text("Copy Haste URL");
+        copy_button.set_tooltip_text(_("Copy URL"));
         copy_button.get_style_context().add_class("action-button");
 
         Gtk.Image copy_ok_image = new Gtk.Image.from_icon_name(
@@ -95,7 +95,7 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
             "list-remove-symbolic", Gtk.IconSize.SMALL_TOOLBAR);
         delete_button.set_relief(Gtk.ReliefStyle.NONE);
         delete_button.set_can_focus(false);
-        delete_button.set_tooltip_text("Delete Haste");
+        delete_button.set_tooltip_text(_("Delete haste"));
         delete_button.get_style_context().add_class("action-button");
 
         Gtk.Box title_main_box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
@@ -111,7 +111,7 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
         url_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE);
 
         Gtk.EventBox url_event_box = new Gtk.EventBox();
-        url_event_box.set_tooltip_text("Click to open the link in your browser");
+        url_event_box.set_tooltip_text(_("Open haste"));
         url_event_box.add(url_label);
         url_event_box.button_press_event.connect(() => {
             try {
@@ -226,7 +226,7 @@ public class HasteApplet.HistoryViewItem : Gtk.Revealer
 
     private void apply_changes(GLib.Settings settings)
     {
-        title = (title_entry.text == "") ? "Untitled" : title_entry.text.strip();
+        title = (title_entry.text == "") ? _("Untitled") : title_entry.text.strip();
 
         title_label.set_text("<b>%s</b>".printf(title));
         title_label.set_use_markup(true);

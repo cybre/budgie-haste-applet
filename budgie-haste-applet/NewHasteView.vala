@@ -37,7 +37,7 @@ public class HasteApplet.NewHasteView : Gtk.Grid
         header_back_button.clicked.connect(() => { stack.set_visible_child_name("history_view"); });
 
         title_entry = new Gtk.Entry();
-        title_entry.set_placeholder_text("Title (Optional)");
+        title_entry.set_placeholder_text(_("Title (Optional)"));
         title_entry.set_max_length(50);
         title_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "edit-clear-symbolic");
         title_entry.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, "Clear");
