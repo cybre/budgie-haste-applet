@@ -44,3 +44,5 @@ intltool-update.in
 /po/POTFILES
 /po/stamp-it
 /po/budgie-haste-applet.pot
+
+*.tar.xz
