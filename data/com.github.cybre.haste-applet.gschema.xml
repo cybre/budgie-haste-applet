@@ -14,7 +14,7 @@
     </key>
 
     <key type="s" name="haste-address">
-      <default>'hastebin.com'</default>
+      <default>'https://hastebin.com'</default>
       <summary>haste-server Address</summary>
       <description>The haste-server address to use for pasting.</description>
     </key>

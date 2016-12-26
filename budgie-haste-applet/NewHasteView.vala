@@ -20,7 +20,7 @@ public class HasteApplet.NewHasteView : Gtk.Grid
     public Gtk.TextView textview;
     public Gtk.Button post_button;
     private string? text = null;
-    public string haste_address { set; get; default = "hastebin.com"; }
+    public string haste_address { set; get; default = "https://hastebin.com"; }
     public string protocol { set; get; default = "http"; }
     public bool is_editing { set; get; default = false; }
     public bool haste_address_invalid { set; get; default = false; }
