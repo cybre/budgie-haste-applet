@@ -24,34 +24,20 @@ public class HasteApplet.HasteAppletSettings : Gtk.Grid
     private Gtk.Switch? switch_label;
 
     [GtkChild]
+    private Gtk.ComboBoxText? combobox_protocol;
+
+    [GtkChild]
     private Gtk.Entry? entry_address;
 
     private Settings? settings;
 
     public HasteAppletSettings(Settings? settings)
     {
-        entry_address.set_input_purpose(Gtk.InputPurpose.URL);
-        entry_address.set_icon_activatable(Gtk.EntryIconPosition.SECONDARY, false);
-        entry_address.set_icon_tooltip_text(Gtk.EntryIconPosition.SECONDARY, _("The URL is invalid"));
-
         this.settings = settings;
-        settings.bind("enable-label", switch_label, "active", SettingsBindFlags.DEFAULT);
-        settings.bind("haste-address", entry_address, "text", SettingsBindFlags.DEFAULT);
 
-        if (!is_the_url_valid(settings.get_string("haste-address"), null, null)) {
-            entry_address.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "dialog-error-symbolic");
-            entry_address.get_style_context().add_class("error");
-        }
-
-        settings.changed.connect(() => {
-            if (is_the_url_valid(settings.get_string("haste-address"), null, null)) {
-                entry_address.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, null);
-                entry_address.get_style_context().remove_class("error");
-            } else {
-                entry_address.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, "dialog-error-symbolic");
-                entry_address.get_style_context().add_class("error");
-            }
-        });
+        settings.bind("enable-label", switch_label, "active", GLib.SettingsBindFlags.DEFAULT);
+        settings.bind("protocol", combobox_protocol, "active_id", GLib.SettingsBindFlags.DEFAULT);
+        settings.bind("haste-address", entry_address, "text", GLib.SettingsBindFlags.DEFAULT);
     }
 }
 
@@ -90,6 +76,30 @@ public class HasteApplet.HasteApplet : Budgie.Applet
         settings = get_applet_settings(uuid);
 
         settings.changed.connect(on_settings_changed);
+
+        // Compatibility
+        if (!settings.get_boolean("fix-applied")) {
+            string haste_address = settings.get_string("haste-address");
+            if (haste_address.has_suffix("/")) {
+                haste_address = haste_address[0:haste_address.length - 1];
+            }
+            if (haste_address.has_prefix("http")) {
+                string[] haste_split = haste_address.split("://");
+                settings.set_string("haste-address", haste_split[1]);
+                if (haste_split[1] == "hastebin.com") {
+                    settings.set_string("protocol", "https");
+                } else {
+                    settings.set_string("protocol", haste_split[0]);
+                }
+            }
+            // hastebin has changed the protocol to https
+            if (haste_address == "hastebin.com") {
+                settings.set_string("protocol", "https");
+            }
+            settings.set_boolean("fix-applied", true);
+        }
+        // End Compatibility
+
 
         Gdk.Display display = get_display();
         Gtk.Clipboard clipboard = Gtk.Clipboard.get_for_display(display, Gdk.SELECTION_CLIPBOARD);
@@ -168,6 +178,7 @@ public class HasteApplet.HasteApplet : Budgie.Applet
 
         on_settings_changed("enable-label");
         on_settings_changed("haste-address");
+        on_settings_changed("protocol");
     }
 
     private async void entry_hack()
@@ -188,28 +199,7 @@ public class HasteApplet.HasteApplet : Budgie.Applet
                 label.set_visible(settings.get_boolean(key));
                 break;
             case "haste-address":
-                string new_url;
-                string? protocol = null;
-                if (is_the_url_valid(settings.get_string(key), out new_url, out protocol)) {
-                    if (new_haste_view.haste_address_invalid) {
-                        new_haste_view.dismiss_error_message();
-                        new_haste_view.post_button.set_sensitive(true);
-                        new_haste_view.haste_address_invalid = false;
-                    }
-
-                    if (protocol != null && protocol != "") {
-                        settings.set_string("protocol", protocol);
-                    } else {
-                        settings.set_string("protocol", "http");
-                    }
-                    new_haste_view.haste_address = new_url;
-                } else {
-                    if (!new_haste_view.haste_address_invalid) {
-                        new_haste_view.show_error_message(_("Invalid haste-server Address"));
-                        new_haste_view.post_button.set_sensitive(false);
-                        new_haste_view.haste_address_invalid = true;
-                    }
-                }
+                new_haste_view.haste_address = settings.get_string(key);
                 break;
             case "protocol":
                 new_haste_view.protocol = settings.get_string(key);
@@ -224,48 +214,6 @@ public class HasteApplet.HasteApplet : Budgie.Applet
         manager.register_popover(applet_box, popover);
         this.manager = manager;
     }
-}
-
-bool is_the_url_valid(string url, out string new_url, out string protocol)
-{
-    new_url = "";
-    if (url != "") {
-        string[] ha_split = url.split("://");
-        if (ha_split.length > 1) {
-            protocol = ha_split[0];
-        }
-        string[]? ha_split2 = null;
-        if (ha_split[1] != null) {
-            ha_split2 = ha_split[1].split("/");
-        } else {
-            ha_split2 = ha_split[0].split("/");
-        }
-        string[] ha_split3 = ha_split2[0].split(".");
-        string[] invalid_characters = {
-            "`", "~", "!", "@", "#", "$", "%", "^",
-            "&", "*", "(", ")", "_", "=", "+",
-            "[", "]", "{", "}", "\\", "|", ";", ":",
-            ",", ".", "<", ">", "/", "?"
-        };
-        foreach (string character in invalid_characters) {
-            foreach (string part in ha_split3) {
-                if (part.length < 2){
-                    return false;
-                }
-                if (part.contains(character)) {
-                    return false;
-                }
-            }
-        }
-
-        if (ha_split3.length >= 2) {
-            if (ha_split3[0] != "" && ha_split3[ha_split3.length -1] != "") {
-                new_url = ha_split2[0];
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 [ModuleInit]

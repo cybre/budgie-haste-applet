@@ -20,10 +20,9 @@ public class HasteApplet.NewHasteView : Gtk.Grid
     public Gtk.TextView textview;
     public Gtk.Button post_button;
     private string? text = null;
-    public string haste_address { set; get; default = "https://hastebin.com"; }
-    public string protocol { set; get; default = "http"; }
+    public string haste_address { set; get; default = "hastebin.com"; }
+    public string protocol { set; get; default = "https"; }
     public bool is_editing { set; get; default = false; }
-    public bool haste_address_invalid { set; get; default = false; }
     public HistoryView history_view;
 
     public NewHasteView(Gtk.Stack stack) {
@@ -70,12 +69,11 @@ public class HasteApplet.NewHasteView : Gtk.Grid
             text = textbuffer.get_text(start_iter, end_iter, true);
             if (text == "") {
                 post_button.set_sensitive(false);
-                if (title_entry.text == "")
+                if (title_entry.text == "") {
                     is_editing = false;
-            } else {
-                if (!haste_address_invalid) {
-                    post_button.set_sensitive(true);
                 }
+            } else {
+                post_button.set_sensitive(true);
                 is_editing = true;
             }
         });
