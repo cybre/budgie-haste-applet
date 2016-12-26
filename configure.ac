@@ -1,4 +1,4 @@
-AC_INIT([budgie-haste-applet], 0.2.7.1, [stfric369@gmail.com], [budgie-haste-applet], [https://github.com/cybre/budgie-haste-applet])
+AC_INIT([budgie-haste-applet], 0.2.8, [stfric369@gmail.com], [budgie-haste-applet], [https://github.com/cybre/budgie-haste-applet])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wno-portability no-dist-gzip dist-xz foreign subdir-objects])
 AC_PROG_CC
