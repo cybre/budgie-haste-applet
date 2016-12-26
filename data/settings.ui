@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <template class="HasteAppletSettings" parent="GtkGrid">
+  <template class="HasteAppletHasteAppletSettings" parent="GtkGrid">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_left">8</property>
