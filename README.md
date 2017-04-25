@@ -17,7 +17,7 @@ libsoup-2.4
 ```
 
 These can be installed on Solus by running:  
-`sudo eopkg it vala libgtk-3-devel glib2-devel libpeas-devel budgie-desktop-devel libsoup-devel`
+`sudo eopkg it vala budgie-desktop-devel libsoup-devel`
 
 ### Installing
 ```
