@@ -1,6 +1,8 @@
 # budgie-haste-applet
 A Budgie applet for pasting text to any haste server.
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/StefanRic)
+
 ---
 
 ### Dependencies
