@@ -1,6 +1,7 @@
 # budgie-haste-applet
 A Budgie applet for pasting text to any haste server.
 
+Buy me a beer/a coffee/love?  
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/StefanRic)
 
 ---
