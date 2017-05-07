@@ -29,7 +29,7 @@
       <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">&lt;big&gt;Your pastes will show up here&lt;/big&gt;</property>
+        <property name="label" translatable="yes">&lt;big&gt;Your hastes will show up here&lt;/big&gt;</property>
         <property name="use_markup">True</property>
         <property name="justify">center</property>
         <property name="wrap">True</property>
