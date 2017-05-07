@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="budgie-haste-applet">
+  <schema id="com.github.cybre.budgie-haste-applet">
+    <key type="b" name="automatic-copy">
+        <default>true</default>
+    </key>
+
+    <key type="b" name="automatic-upload">
+        <default>true</default>
+    </key>
+
+    <key type="s" name="hastebin-server">
+      <default>'https://hastebin.com'</default>
+    </key>
+
+    <key type="s" name="upload-provider">
+        <default>'hastebin'</default>
+    </key>
+
+    <key type="a(xsss)" name="history">
+        <default>[]</default>
+    </key>
+  </schema>
+</schemalist>

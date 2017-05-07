@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="addon">
-  <id>budgie-haste-applet</id>
+  <id>com.github.cybre.budgie-haste-applet</id>
   <pkgname>budgie-haste-applet</pkgname>
+  <translation type="gettext">budgie-haste-applet</translation>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
-  <extends>budgie-desktop.desktop</extends>
-  <name>Haste Applet</name>
-  <summary>A code snippet sharing tool for the Budgie Desktop</summary>
+  <name>Budgie Haste Applet</name>
+  <summary>Post any text, be it code or prose, to various services directly from your desktop</summary>
   <description>
     <p>
-    Haste Applet is a Budgie Desktop applet for sharing code snippets over the Internet.
+    Budgie Haste Applet is a Budgie Desktop widget for sharing code snippets over the Internet.
+    It can upload text to various paste services such as Hastebin, Pastebin, GNOME Paste, etc.
     It can connect to any haste-server instance so you can use your own with this applet.
     It lives in your panel and features a clean interface for quickly sharing code snippets.
     </p>
@@ -18,17 +19,18 @@
     </p>
     <ul>
       <li>Share code and plain text documents</li>
-      <li>Upload your snippets to any haste-server instance</li>
-      <li>Keep a history of your snippets (with editable titles)</li>
+      <li>Upload your snippets to any haste-server instance, Pastebin, GNOME Paste and others</li>
+      <li>Keep a history of your snippets</li>
     </ul>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/cybre/budgie-haste-applet/master/screenshot.png</image>
-      <caption>The start and history pages</caption>
+      <image>https://raw.githubusercontent.com/cybre/budgie-haste-applet/master/data/images/screenshot1.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/cybre/budgie-haste-applet</url>
   <url type="bugtracker">https://github.com/cybre/budgie-haste-applet/issues</url>
+  <url type="translate">https://www.transifex.com/cybres-budgie-applets/budgie-haste-applet</url>
+  <url type="donation">https://paypal.me/StefanRic</url>
   <updatecontact>stfric369@gmail.com</updatecontact>
 </component>

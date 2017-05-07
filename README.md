@@ -1,44 +1,38 @@
-# budgie-haste-applet
-A Budgie applet for pasting text to any haste server.
+# Budgie Haste Widget
+Post any text, be it code or prose, to various services directly from your desktop. Made with ❤ for Budgie Desktop.
 
 Buy me a beer/a coffee/love?  
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/StefanRic)
 
+![Screenshot](data/images/screenshot1.png)
+
 ---
 
-### Dependencies
+## Dependencies
 ```
-vala
+budgie-1.0 >= 2
 gtk+-3.0
-gio-unix-2.0
-libpeas-1.0
-PeasGtk-1.0
-budgie-1.0
 libsoup-2.4
+vala
 ```
 
 These can be installed on Solus by running:  
-`sudo eopkg it vala budgie-desktop-devel libsoup-devel`
+```bash
+sudo eopkg it vala budgie-desktop-devel libsoup-devel`
+```
 
 ### Installing
+
+**From source**  
+```bash
+mkdir build && cd build
+meson --prefix /usr --buildtype=plain ..
+ninja
+sudo ninja install
 ```
-./autogen.sh --prefix=/usr
-make
-sudo make install
-```
-#### Solus
+
+**Solus**  
 You can install budgie-haste-applet from the Software Centre or via the command line:
-```
+```bash
 sudo eopkg it budgie-haste-applet
 ```
-
-#### Arch Linux
-The package can be installed on Arch using
-```
-yaourt -S haste-applet
-```
-
----
-
-### Screenshot
-![Screenshot](screenshot.png)

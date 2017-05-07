@@ -9,7 +9,9 @@
  * (at your option) any later version.
  */
 
-public class HasteApplet.AutomaticScrollBox : Gtk.ScrolledWindow
+namespace HasteApplet.Widgets {
+
+public class AutomaticScrollBox : Gtk.ScrolledWindow
 {
     public int max_height { default = 512; get; set; }
 
@@ -49,3 +51,5 @@ public class HasteApplet.AutomaticScrollBox : Gtk.ScrolledWindow
         }
     }
 }
+
+} // End namespace
