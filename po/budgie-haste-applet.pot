@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the budgie-haste-applet package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: budgie-haste-applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-07 03:59+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/Views/HistoryView.vala:113 src/Widgets/HistoryItem.vala:304
+msgid "Untitled"
+msgstr ""
+
+#: src/Widgets/HistoryItem.vala:94
+msgid "Local"
+msgstr ""
+
+#: data/ui/history_item.ui:87
+msgid "Edit haste title"
+msgstr ""
+
+#: data/ui/history_item.ui:121
+msgid "Upload haste"
+msgstr ""
+
+#: data/ui/history_item.ui:141
+msgid "Copy haste link"
+msgstr ""
+
+#: data/ui/history_item.ui:180
+msgid "Delete haste"
+msgstr ""
+
+#: data/ui/history_item.ui:212
+msgid "Open paste link"
+msgstr ""
+
+#: data/ui/history_item.ui:283
+msgid "<big>Uploading</big>"
+msgstr ""
+
+#: data/ui/history_item.ui:308 data/ui/history_item.ui:390
+msgid "Cancel"
+msgstr ""
+
+#: data/ui/history_item.ui:312
+msgid "Cancel upload"
+msgstr ""
+
+#: data/ui/history_item.ui:351
+msgid "<big>Upload failed</big>"
+msgstr ""
+
+#: data/ui/history_item.ui:371
+msgid "Try again"
+msgstr ""
+
+#: data/ui/history_item.ui:431
+msgid "<big>Upload queued</big>"
+msgstr ""
+
+#: data/ui/history_item.ui:442
+msgid "Remove"
+msgstr ""
+
+#: data/ui/history_placeholder.ui:32
+msgid "<big>Your pastes will show up here</big>"
+msgstr ""
+
+#: data/ui/history_view.ui:29
+msgid "<span font=\"11\">Recent Hastes</span>"
+msgstr ""
+
+#: data/ui/history_view.ui:47
+msgid "Add"
+msgstr ""
+
+#: data/ui/history_view.ui:51 data/ui/history_view.ui:66
+#: data/ui/settings_view.ui:30
+msgid "Back"
+msgstr ""
+
+#: data/ui/history_view.ui:119
+msgid "Clear all Hastes"
+msgstr ""
+
+#: data/ui/settings_view.ui:49
+msgid "<span font=\"11\">Settings</span>"
+msgstr ""
+
+#: data/ui/settings_view.ui:89 data/ui/settings_view.ui:102
+msgid "Automatically copy the haste URL after uploading it"
+msgstr ""
+
+#: data/ui/settings_view.ui:91
+msgid "Automatic copy"
+msgstr ""
+
+#: data/ui/settings_view.ui:115 data/ui/settings_view.ui:128
+msgid "Service to use for uploading hastes"
+msgstr ""
+
+#: data/ui/settings_view.ui:117
+msgid "Upload provider"
+msgstr ""
+
+#: data/ui/settings_view.ui:150 data/ui/settings_view.ui:164
+msgid "The hastebin server you wish to upload hastes to"
+msgstr ""
+
+#: data/ui/settings_view.ui:152
+msgid "Hastebin server"
+msgstr ""
+
+#: data/ui/settings_view.ui:192
+msgid "Reset settings"
+msgstr ""
+
+#: data/ui/settings_view.ui:196
+msgid "Reset all settings to default"
+msgstr ""
