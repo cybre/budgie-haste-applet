@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: budgie-haste-applet\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-07 03:59+0200\n"
+"POT-Creation-Date: 2017-05-07 20:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgid "Delete haste"
 msgstr ""
 
 #: data/ui/history_item.ui:212
-msgid "Open paste link"
+msgid "Open haste link"
 msgstr ""
 
 #: data/ui/history_item.ui:283
