@@ -1,24 +1,30 @@
-list,
-row,
-.budgie-haste-applet {
+popover.budgie-haste-applet,
+.budgie-haste-applet list,
+.budgie-haste-applet row {
     padding: 0px;
 }
 
-.budgie-haste-applet .view-header {
+.budgie-haste-applet frame.view-header {
     padding: 10px;
 }
 
-.budgie-haste-applet .view-header,
-.budgie-haste-applet .editor-header {
-    border-bottom: 1px solid mix(@theme_base_color, #000000,  0.35);
-    box-shadow: 0px 1px 1px alpha(@theme_fg_color, 0.04);
+
+.budgie-haste-applet frame.view-header,
+.budgie-haste-applet frame.view-header > border {
+    border: none;
 }
 
-.view-header .linked > button {
+.budgie-haste-applet frame.view-header,
+.budgie-haste-applet frame.editor-header {
+    box-shadow: 0px 1px 1px alpha(@theme_fg_color, 0.04);
+    border-bottom: 1px solid mix(@theme_base_color, #000000,  0.35);
+}
+
+.budgie-haste-applet .view-header .linked > button {
     box-shadow: none;
 }
 
-.view-header .linked > button:first-child {
+.budgie-haste-applet .view-header .linked > button:first-child {
     border-right: 1px solid mix(@theme_base_color, #000000,  0.25);
 }
 
@@ -48,7 +54,7 @@ row,
 }
 
 
-.budgie-haste-applet .bottom-area {
+.budgie-haste-applet box.bottom-area {
     border-top: 1px solid mix(@theme_base_color, #000000, 0.35);
     box-shadow: inset 0px 1px 1px alpha(@theme_fg_color, 0.04);
 }
@@ -59,13 +65,13 @@ row,
     padding: 5px;
 }
 
-.budgie-haste-applet .bottom-area .haste-it {
+.budgie-haste-applet .bottom-area button.haste-it {
     border-top-right-radius: 0px;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-.budgie-haste-applet .bottom-area .upload-button {
+.budgie-haste-applet .bottom-area button.upload-button {
     background: transparent;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -79,17 +85,16 @@ row,
 .budgie-haste-applet .bottom-area button.upload-button:active,
 .budgie-haste-applet .bottom-area button.upload-button:checked {
     background: @theme_selected_bg_color;
-
 }
 
-.budgie-haste-applet .history-separator {
+.budgie-haste-applet separator.history-separator {
     padding: 0;
     margin: 0;
     background-color: mix(@theme_base_color, #000000, 0.35);
     box-shadow: 0px 1px 1px alpha(@theme_fg_color, 0.04);
 }
 
-.budgie-haste-applet .bottom-button {
+.budgie-haste-applet button.bottom-button {
     border-radius: 0 0 2px 2px;
     border: 0;
     border-top: 1px solid mix(@theme_base_color, #000000, 0.35);
