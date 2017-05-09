@@ -36,6 +36,9 @@ public class HistoryItem : Gtk.Box
     private Gtk.Label? time_label;
 
     [GtkChild]
+    private Gtk.Box? action_area;
+
+    [GtkChild]
     public Gtk.Separator? separator;
 
     private string _item_title;
@@ -166,6 +169,16 @@ public class HistoryItem : Gtk.Box
 
         });
 
+        main_revealer.enter_notify_event.connect(() => {
+            action_area.get_style_context().add_class("shown");
+            return true;
+        });
+
+        main_revealer.leave_notify_event.connect(() => {
+            action_area.get_style_context().remove_class("shown");
+            return true;
+        });
+
         this.show_all();
     }
 
@@ -176,7 +189,6 @@ public class HistoryItem : Gtk.Box
             return false;
         });
     }
-
 
     [GtkCallback]
     private void edit_paste()
