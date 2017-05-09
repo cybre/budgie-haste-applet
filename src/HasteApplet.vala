@@ -55,7 +55,6 @@ public class Applet : Budgie.Applet
         // Bake in our theme
         Gdk.Screen screen = this.get_display().get_default_screen();
         Gtk.CssProvider provider = new Gtk.CssProvider();
-        string gtk_version = @"$(Gtk.get_major_version()).$(Gtk.get_minor_version())";
         string style_file = "/com/github/cybre/budgie-haste-applet/style/style.css";
         provider.load_from_resource(style_file);
         Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
