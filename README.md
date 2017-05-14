@@ -11,6 +11,7 @@ Buy me a beer/a coffee/love?
 ## Dependencies
 ```
 budgie-1.0 >= 2
+json-glib-1.0
 gtk+-3.0
 libsoup-2.4
 vala
@@ -18,7 +19,7 @@ vala
 
 These can be installed on Solus by running:  
 ```bash
-sudo eopkg it vala budgie-desktop-devel libsoup-devel`
+sudo eopkg it vala budgie-desktop-devel libjson-glib-devel libsoup-devel
 ```
 
 ### Installing
