@@ -12,7 +12,7 @@
 namespace HasteApplet.Widgets
 {
 
-public class IndicatorWindow : Gtk.Popover {
+public class IndicatorWindow : Budgie.Popover {
     private static IndicatorWindow? _instance = null;
 
     public IndicatorWindow(Gtk.Widget? window_parent) {

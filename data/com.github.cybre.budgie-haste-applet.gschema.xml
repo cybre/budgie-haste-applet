@@ -2,11 +2,15 @@
 <schemalist gettext-domain="budgie-haste-applet">
   <schema id="com.github.cybre.budgie-haste-applet">
     <key type="b" name="automatic-copy">
-        <default>true</default>
+      <default>true</default>
     </key>
 
     <key type="b" name="automatic-upload">
-        <default>true</default>
+      <default>true</default>
+    </key>
+
+    <key type="s" name="github-token">
+      <default>''</default>
     </key>
 
     <key type="s" name="hastebin-server">
@@ -14,11 +18,11 @@
     </key>
 
     <key type="s" name="upload-provider">
-        <default>'hastebin'</default>
+      <default>'hastebin'</default>
     </key>
 
     <key type="a(xsss)" name="history">
-        <default>[]</default>
+      <default>[]</default>
     </key>
   </schema>
 </schemalist>

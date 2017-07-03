@@ -32,6 +32,7 @@ private class Uploader : GLib.Object
         upload_providers.set("gpaste", new Providers.GPaste());
         upload_providers.set("hastebin", new Providers.Hastebin());
         upload_providers.set("pastebin", new Providers.Pastebin());
+        upload_providers.set("githubgist", new Providers.GitHubGist());
     }
 
     public async void start_upload()
@@ -53,7 +54,7 @@ private class Uploader : GLib.Object
 
             bool status = false;
             string data = item.item_data;
-            string url;
+            string? url = null;
 
             stdout.putc('\n');
 

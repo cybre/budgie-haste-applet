@@ -28,6 +28,12 @@ class SettingsManager : GLib.Object
         }
     }
 
+    public string github_token {
+        owned get {
+            return settings.get_string("github-token");
+        }
+    }
+
     public string hastebin_server {
         owned get {
             return settings.get_string("hastebin-server");

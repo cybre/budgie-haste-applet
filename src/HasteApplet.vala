@@ -56,8 +56,11 @@ public class Applet : Budgie.Applet
         Gdk.Screen screen = this.get_display().get_default_screen();
         Gtk.CssProvider provider = new Gtk.CssProvider();
         string style_file = "/com/github/cybre/budgie-haste-applet/style/style.css";
-        provider.load_from_resource(style_file);
-        Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        GLib.Timeout.add(1000, () => {
+            provider.load_from_resource(style_file);
+            Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+            return false;
+        });
 
         event_box = new Gtk.EventBox();
         this.add(event_box);
