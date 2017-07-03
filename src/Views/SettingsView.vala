@@ -28,6 +28,12 @@ private class SettingsView : Gtk.Box
     private Gtk.Entry? hastebin_server_entry;
 
     [GtkChild]
+    private Gtk.Revealer? github_token_revealer;
+
+    [GtkChild]
+    private Gtk.Entry? github_token_entry;
+
+    [GtkChild]
     private Gtk.Switch? automatic_copy_switch;
 
     public SettingsView()
@@ -42,16 +48,21 @@ private class SettingsView : Gtk.Box
 
         GLib.Settings settings = BackendUtil.settings_manager.get_settings();
         settings.bind("upload-provider", upload_provider_combobox, "active_id", GLib.SettingsBindFlags.DEFAULT);
+        settings.bind("github-token", github_token_entry, "text", GLib.SettingsBindFlags.DEFAULT);
         settings.bind("hastebin-server", hastebin_server_entry, "text", GLib.SettingsBindFlags.DEFAULT);
         settings.bind("automatic-copy", automatic_copy_switch, "active", GLib.SettingsBindFlags.DEFAULT);
 
         settings.changed["upload-provider"].connect(() => {
             bool is_hastebin = (settings.get_string("upload-provider") == "hastebin");
+            bool is_github = (settings.get_string("upload-provider") == "githubgist");
             hastebin_server_revealer.set_reveal_child(is_hastebin);
+            github_token_revealer.set_reveal_child(is_github);
         });
 
         bool is_hastebin = (settings.get_string("upload-provider") == "hastebin");
+        bool is_github = (settings.get_string("upload-provider") == "githubgist");
         hastebin_server_revealer.set_reveal_child(is_hastebin);
+        github_token_revealer.set_reveal_child(is_github);
     }
 
     [GtkCallback]
