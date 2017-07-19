@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the budgie-haste-applet package.
+# 
+# Translators:
+# Christian Kaindl <crisscross.kaindl@outlook.de>, 2016
+# Ettore Atalan <atalanttore@googlemail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: budgie-haste-applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-07 22:24+0200\n"
+"PO-Revision-Date: 2017-06-14 12:53+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German (http://www.transifex.com/cybres-budgie-applets/budgie-haste-applet/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/Views/HistoryView.vala:113 src/Widgets/HistoryItem.vala:304
+msgid "Untitled"
+msgstr "Unbenannt"
+
+#: src/Widgets/HistoryItem.vala:94
+msgid "Local"
+msgstr "Lokal"
+
+#: data/ui/history_item.ui:87
+msgid "Edit haste title"
+msgstr "Haste-Titel bearbeiten"
+
+#: data/ui/history_item.ui:121
+msgid "Upload haste"
+msgstr "Haste hochladen"
+
+#: data/ui/history_item.ui:141
+msgid "Copy haste link"
+msgstr "Haste-Link kopieren"
+
+#: data/ui/history_item.ui:180
+msgid "Delete haste"
+msgstr "Haste löschen"
+
+#: data/ui/history_item.ui:212
+msgid "Open haste link"
+msgstr "Haste-Link öffnen"
+
+#: data/ui/history_item.ui:283
+msgid "<big>Uploading</big>"
+msgstr "<big>Hochladevorgang</big>"
+
+#: data/ui/history_item.ui:308 data/ui/history_item.ui:390
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: data/ui/history_item.ui:312
+msgid "Cancel upload"
+msgstr "Hochladen abbrechen"
+
+#: data/ui/history_item.ui:351
+msgid "<big>Upload failed</big>"
+msgstr "<big>Hochladen fehlgeschlagen</big>"
+
+#: data/ui/history_item.ui:371
+msgid "Try again"
+msgstr "Erneut versuchen"
+
+#: data/ui/history_item.ui:431
+msgid "<big>Upload queued</big>"
+msgstr "<big>Hochladen in Warteschlange eingereiht</big>"
+
+#: data/ui/history_item.ui:442
+msgid "Remove"
+msgstr "Entfernen"
+
+#: data/ui/history_placeholder.ui:32
+msgid "<big>Your hastes will show up here</big>"
+msgstr "<big>Ihre Hastes werden hier auftauchen</big>"
+
+#: data/ui/history_view.ui:29
+msgid "<span font=\"11\">Recent Hastes</span>"
+msgstr "<span font=\"11\">Kürzliche Hastes</span>"
+
+#: data/ui/history_view.ui:47
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: data/ui/history_view.ui:51 data/ui/history_view.ui:66
+#: data/ui/settings_view.ui:30
+msgid "Back"
+msgstr "Zurück"
+
+#: data/ui/history_view.ui:119
+msgid "Clear all Hastes"
+msgstr "Alle Hastes leeren"
+
+#: data/ui/settings_view.ui:49
+msgid "<span font=\"11\">Settings</span>"
+msgstr "<span font=\"11\">Einstellungen</span>"
+
+#: data/ui/settings_view.ui:89 data/ui/settings_view.ui:102
+msgid "Automatically copy the haste URL after uploading it"
+msgstr "Haste-URL nach dem Hochladen automatisch kopieren"
+
+#: data/ui/settings_view.ui:91
+msgid "Automatic copy"
+msgstr "Automatische Kopie"
+
+#: data/ui/settings_view.ui:115 data/ui/settings_view.ui:128
+msgid "Service to use for uploading hastes"
+msgstr "Dienst zum Hochladen von Hastes"
+
+#: data/ui/settings_view.ui:117
+msgid "Upload provider"
+msgstr "Hochladeanbieter"
+
+#: data/ui/settings_view.ui:150 data/ui/settings_view.ui:164
+msgid "The hastebin server you wish to upload hastes to"
+msgstr "Der Hastebin-Server, zu dem Sie Hastes hochladen möchten"
+
+#: data/ui/settings_view.ui:152
+msgid "Hastebin server"
+msgstr "Hastebin-Server"
+
+#: data/ui/settings_view.ui:192
+msgid "Reset settings"
+msgstr "Einstellungen zurücksetzen"
+
+#: data/ui/settings_view.ui:196
+msgid "Reset all settings to default"
+msgstr "Alle Einstellungen auf Standard zurücksetzen"

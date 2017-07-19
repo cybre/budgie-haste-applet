@@ -1,0 +1,132 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the budgie-haste-applet package.
+# 
+# Translators:
+# Davidmp <medipas@gmail.com>, 2016-2017
+msgid ""
+msgstr ""
+"Project-Id-Version: budgie-haste-applet\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-07 22:24+0200\n"
+"PO-Revision-Date: 2017-05-12 19:13+0000\n"
+"Last-Translator: Davidmp <medipas@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/cybres-budgie-applets/budgie-haste-applet/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/Views/HistoryView.vala:113 src/Widgets/HistoryItem.vala:304
+msgid "Untitled"
+msgstr "Sense títol"
+
+#: src/Widgets/HistoryItem.vala:94
+msgid "Local"
+msgstr "Local"
+
+#: data/ui/history_item.ui:87
+msgid "Edit haste title"
+msgstr "Edita el títol de la celeritat"
+
+#: data/ui/history_item.ui:121
+msgid "Upload haste"
+msgstr "Actualitza la celeritat"
+
+#: data/ui/history_item.ui:141
+msgid "Copy haste link"
+msgstr "Copia l'enllaç de la celeritat"
+
+#: data/ui/history_item.ui:180
+msgid "Delete haste"
+msgstr "Esborra la celeritat"
+
+#: data/ui/history_item.ui:212
+msgid "Open haste link"
+msgstr "Obre l'enllaç de la celeritat"
+
+#: data/ui/history_item.ui:283
+msgid "<big>Uploading</big>"
+msgstr "<big>Càrrega</big>"
+
+#: data/ui/history_item.ui:308 data/ui/history_item.ui:390
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: data/ui/history_item.ui:312
+msgid "Cancel upload"
+msgstr "Cancel·la la càrrega"
+
+#: data/ui/history_item.ui:351
+msgid "<big>Upload failed</big>"
+msgstr "<big>Ha fallat la càrrega</big>"
+
+#: data/ui/history_item.ui:371
+msgid "Try again"
+msgstr "Torneu-ho a provar"
+
+#: data/ui/history_item.ui:431
+msgid "<big>Upload queued</big>"
+msgstr "<big>Càrrega a la cua</big>"
+
+#: data/ui/history_item.ui:442
+msgid "Remove"
+msgstr "Elimina"
+
+#: data/ui/history_placeholder.ui:32
+msgid "<big>Your hastes will show up here</big>"
+msgstr "<big>Les vostres celeritats es mostraran aquí</big>"
+
+#: data/ui/history_view.ui:29
+msgid "<span font=\"11\">Recent Hastes</span>"
+msgstr "<span font=\"11\">Celeritats recents</span>"
+
+#: data/ui/history_view.ui:47
+msgid "Add"
+msgstr "Afegeix"
+
+#: data/ui/history_view.ui:51 data/ui/history_view.ui:66
+#: data/ui/settings_view.ui:30
+msgid "Back"
+msgstr "Enrere"
+
+#: data/ui/history_view.ui:119
+msgid "Clear all Hastes"
+msgstr "Neteja totes les celeritats"
+
+#: data/ui/settings_view.ui:49
+msgid "<span font=\"11\">Settings</span>"
+msgstr "<span font=\"11\">Paràmetres</span>"
+
+#: data/ui/settings_view.ui:89 data/ui/settings_view.ui:102
+msgid "Automatically copy the haste URL after uploading it"
+msgstr "Copia automàticament l'URL de la celeritat després de la càrrega"
+
+#: data/ui/settings_view.ui:91
+msgid "Automatic copy"
+msgstr "Còpia automàtica"
+
+#: data/ui/settings_view.ui:115 data/ui/settings_view.ui:128
+msgid "Service to use for uploading hastes"
+msgstr "Servei a usar per carregar celeritats"
+
+#: data/ui/settings_view.ui:117
+msgid "Upload provider"
+msgstr "Proveïdor de càrrega"
+
+#: data/ui/settings_view.ui:150 data/ui/settings_view.ui:164
+msgid "The hastebin server you wish to upload hastes to"
+msgstr "El servidor de celeritat que voleu carregar fa celeritats a"
+
+#: data/ui/settings_view.ui:152
+msgid "Hastebin server"
+msgstr "Servidor de celeritat"
+
+#: data/ui/settings_view.ui:192
+msgid "Reset settings"
+msgstr "Restableix els paràmetres"
+
+#: data/ui/settings_view.ui:196
+msgid "Reset all settings to default"
+msgstr "Restableix tots els paràmetres als valors per defecte"
