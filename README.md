@@ -38,8 +38,5 @@ You can install budgie-haste-applet from the Software Centre or via the command 
 sudo eopkg it budgie-haste-applet
 ```
 
-**Archlinux(AUR)**  
-You can install budgie-haste-applet from AUR using via the command line:
-```bash
-yaourt -S budgie-haste-applet
-```
+**Arch Linux**  
+You can install the [budgie-haste-applet](https://aur.archlinux.org/packages/budgie-haste-applet) package from the AUR
