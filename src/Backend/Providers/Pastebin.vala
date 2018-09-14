@@ -31,7 +31,7 @@ private class Pastebin : IProvider
 
         string url = "https://pastebin.com/api/api_post.php";
 
-        string fields = Soup.form_encode (
+        string fields = Soup.Form.encode (
             "api_dev_key", "177ebf23f666f85bd607653ab0c87708",
             "api_option", "paste",
             "api_paste_code", data.data,
