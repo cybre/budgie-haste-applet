@@ -34,7 +34,7 @@ private class GPaste : IProvider
         // One year
         int expire = (24 * 60 * 60) * 365;
 
-        string fields = Soup.form_encode (
+        string fields = Soup.Form.encode (
             "data", data.data,
             "title", title,
             "language", "text",
