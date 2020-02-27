@@ -7,6 +7,6 @@ install_data('com.github.cybre.budgie-haste-applet.gschema.xml',
              install_dir: join_paths(datadir, 'glib-2.0' ,'schemas'))
 
 install_data('com.github.cybre.budgie-haste-applet.appdata.xml',
-             install_dir: join_paths(datadir, 'appdata'))
+             install_dir: join_paths(datadir, 'metainfo'))
 
 meson.add_install_script('meson_post_install.py')
