@@ -3,7 +3,7 @@
   <id>com.github.cybre.budgie-haste-applet</id>
   <pkgname>budgie-haste-applet</pkgname>
   <translation type="gettext">budgie-haste-applet</translation>
-  <metadata_license>CC0-1.0</metadata_license>
+  <metadata_license>GPL-2.0+</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Budgie Haste Applet</name>
   <summary>Post any text, be it code or prose, to various services directly from your desktop</summary>
